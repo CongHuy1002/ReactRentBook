@@ -1,13 +1,13 @@
-import React from "react";
-import './imgbook/book.css'
+import React from 'react';
+import './imgbook/book.css';
 
-function BookItem({ image, name,author, price }) {
+function BookItem({ book }) {
   return (
-    <div className="bookItem">
-      <img src={image} alt="imgbook" />
-      <h1> {name} </h1>
-      <p>{author}</p>
-      <p> ${price} </p>
+    <div className='bookItem'>
+      {/* <img src={image} alt='imgbook' /> */}
+      {/* <h1> {book.name} </h1>
+      <p></p>
+      <p> ${book.price} </p> */}
     </div>
   );
 }
