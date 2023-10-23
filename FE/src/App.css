@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+<<<<<<< Updated upstream
+=======
+.heading p {
+  color: #72809d;
+}
+
+.swiper-3d .swiper-slide-shadow-left {
+  background-image: none;
+}
+>>>>>>> Stashed changes

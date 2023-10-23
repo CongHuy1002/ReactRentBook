@@ -1,0 +1,17 @@
+.bookItem {
+    text-align: center;
+    display: flex;
+    margin-right: 90px;
+    margin-bottom: 50px;
+}
+.giasach{
+    font-size: 30px;
+    color: red;
+    font-weight: bold;
+}
+.bookItem img{
+ width: 220px;
+ height: 332px;
+ border-radius: 20px;
+}
+

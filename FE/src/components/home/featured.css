@@ -1,0 +1,15 @@
+.title-featured{
+    font-weight: bolder;
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Điều chỉnh CSS cho thiết bị có kích thước màn hình nhỏ hơn 768px (thiết bị di động) */
+@media (max-width: 768px) {
+    .title-featured {
+        font-size: 1.5rem; /* Điều chỉnh kích thước font chữ */
+    }
+    .swiper-featured .swiper-slide {
+        display: block;
+    }
+}
