@@ -1,0 +1,9 @@
+.featuredItem img{
+    width: 260px;
+    height: 332px;
+    border-radius: 20px;
+   }
+.featured-card{
+    text-align: center;
+    justify-content: center;
+}
