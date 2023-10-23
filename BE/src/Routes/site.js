@@ -4,9 +4,9 @@ const multer = require('multer');
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     if (file.fieldname === 'images') {
-      cb(null, 'src/public/images');
+      cb(null, '../FE/src/assets/public/images');
     } else if (file.fieldname === 'pdfFile') {
-      cb(null, 'src/public/PDF');
+      cb(null, '../FE/src/assets/public/Pdf');
     } else {
       cb(new Error('Invalid fieldname'));
     }
@@ -30,11 +30,23 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({ storage: storage, fileFilter: fileFilter });
 const siteController = require('../app/controllers/siteController');
 const verifyController = require('../app/middlewares/verifyController');
+<<<<<<< Updated upstream
 router.get('/', verifyController.verifyToken, verifyController.verifyAdmin, siteController.index);
 router.get('/createForm', verifyController.verifyToken, verifyController.verifyAdmin, siteController.createFormBook);
 router.get('/loginForm', siteController.createFormLogin);
 router.get('/registerForm', siteController.createFormRegister);
 router.post('/postbook', upload.fields([{ name: 'images', maxCount: 5 }, { name: 'pdfFile', maxCount: 1 }]), siteController.postBook);
+=======
+router.get('/', siteController.index);
+router.post(
+  '/postbook',
+  upload.fields([
+    { name: 'images', maxCount: 5 },
+    { name: 'pdfFile', maxCount: 1 },
+  ]),
+  siteController.postBook,
+);
+>>>>>>> Stashed changes
 router.get('/details/:slug', siteController.detailsBook);
 router.delete('/:id', siteController.deleteBook);
 router.get('/mybook', verifyController.verifyToken, siteController.myBook);
