@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Book } from "../data/Book";
 import BookItem from "../data/BookItem";
 import { BookCard } from './BookCard/BookCard';
+import { Spinner } from '@chakra-ui/react';
 import "../styles/Book.css";
 import axios from 'axios';
 
@@ -34,13 +35,18 @@ const BestSeller = () => {
   return (
     <>
       {isLoading ? (
-        <h1>Loading</h1>
+      <Spinner/>
       ) : (
-        <div className="menu">
+        <div className="menu container">
           <h1 className="menuTitle">Best Sellers</h1>
-          <div className="menuList">
-              {books.map((book) => (
-              <BookCard book={book}></BookCard>
+          <div className="row">
+              {Book.map((book) => (
+                <>
+                  <div className="col-lg-4">
+                    <BookCard book={book}></BookCard>
+                  </div>
+                </>
+              
             ))}
           </div>
         </div>
