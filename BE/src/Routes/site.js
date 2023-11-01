@@ -6,7 +6,7 @@ const storage = multer.diskStorage({
     if (file.fieldname === 'images') {
       cb(null, '../FE/src/assets/public/images');
     } else if (file.fieldname === 'pdfFile') {
-      cb(null, '../FE/src/assets/public/images');
+      cb(null, '../FE/src/assets/public/Pdf');
     } else {
       cb(new Error('Invalid fieldname'));
     }
