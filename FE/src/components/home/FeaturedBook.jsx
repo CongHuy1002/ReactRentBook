@@ -10,13 +10,12 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
-import { Navigation, Pagination,EffectCoverflow } from 'swiper/modules';
-
+import { Navigation, Pagination, EffectCoverflow } from 'swiper/modules';
 
 const FeaturedBook = () => {
     return (
-        <div className="swiper-featured">
-            <h1 className="swiper-featured">Featured Book</h1>
+        <div className="swiper-featured-container">
+            <h1 className="swiper-featured-title">Featured Book</h1>
             <Swiper
                 effect={'coverflow'}
                 grabCursor={true}
@@ -40,12 +39,18 @@ const FeaturedBook = () => {
             >
                 {Book.map((book, key) => (
                     <SwiperSlide key={key}>
-                        <BookItem
-                            image={book.image}
-                            name={book.name}
-                            author={book.author}
-                            price={book.price}
-                        />
+                        {/* <div className='bookItem'>
+                            <img src={book.image} alt='imgbook' />
+                            <h1> {book.name} </h1>
+                            <p></p>
+                            <p> ${book.price} </p>
+                        </div> */}
+                        <div className="">
+                            <img src={book.image} alt='imgbook' />
+                            <h1> {book.name} </h1>
+                            <p></p>
+                            <p> ${book.price} </p>
+                        </div>
                     </SwiperSlide>
                 ))}
             </Swiper>

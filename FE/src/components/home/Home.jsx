@@ -3,7 +3,7 @@ import Hero from './Hero'
 import BestSeller from './BestSeller'
 import GenresBook from './GenresBook'
 import FeaturedBook from './FeaturedBook'
-
+import { CustomerCard } from './CustomerCard'
 
 const Home = () => {
   return (
@@ -12,6 +12,7 @@ const Home = () => {
       <BestSeller />
       <GenresBook />
       <FeaturedBook />
+      <CustomerCard/>
     </div>
   )
 }
