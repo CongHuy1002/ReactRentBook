@@ -4,9 +4,9 @@ const multer = require('multer');
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     if (file.fieldname === 'images') {
-      cb(null, 'src/public/images');
+      cb(null, '../FE/src/assets/public/images');
     } else if (file.fieldname === 'pdfFile') {
-      cb(null, 'src/public/PDF');
+      cb(null, '../FE/src/assets/public/images');
     } else {
       cb(new Error('Invalid fieldname'));
     }
@@ -40,14 +40,12 @@ const upload = multer({ storage: storage, fileFilter: fileFilter });
 const siteController = require('../app/controllers/siteController');
 const verifyController = require('../app/middlewares/verifyController');
 router.get('/', siteController.index);
-router.get(
-  '/createForm',
-  verifyController.verifyToken,
-  verifyController.verifyAdmin,
-  siteController.createFormBook,
-);
-router.get('/loginForm', siteController.createFormLogin);
-router.get('/registerForm', siteController.createFormRegister);
+// router.get(
+//   '/createForm',
+//   // verifyController.verifyToken,
+//   // verifyController.verifyAdmin,
+//   siteController.createFormBook,
+// );
 router.post(
   '/postbook',
   upload.fields([

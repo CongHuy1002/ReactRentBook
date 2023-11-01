@@ -15,24 +15,6 @@ class siteController {
       res.status(500);
     }
   }
-
-  async createFormBook(req, res, next) {
-    try {
-      const author = await Author.find().lean();
-      res.render('crudBook/create', {
-        author,
-      });
-    } catch (err) {}
-  }
-  createFormLogin(req, res, next) {
-    const loginAPI = process.env.loginAPI;
-    res.render('login', {
-      loginAPI,
-    });
-  }
-  createFormRegister(req, res, next) {
-    res.render('register');
-  }
   async postBook(req, res, next) {
     try {
       const imageFiles = req.files['images']; // Retrieve the array of image files
