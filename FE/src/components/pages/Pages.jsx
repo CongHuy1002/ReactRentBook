@@ -4,6 +4,9 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Header from '../common/header/Header'
 import Home from "../home/Home"
 import Footer from '../common/footer/Footer'
+import Signin from "../signin/Signin"
+import Signup from "../signup/Signup"
+import SignupEmail from "../signupwithemail/SignupEmail"
 
 const Pages = () => {
   return (<>
@@ -11,6 +14,9 @@ const Pages = () => {
     <Header />
     <Switch>
      <Route exact path='/' component={Home} /> 
+     <Route exact path='/signin' component={Signin} /> 
+     <Route exact path='/signup' component={Signup} /> 
+     <Route exact path='/signupemail' component={SignupEmail} /> 
     </Switch>
     <Footer />
     </Router>

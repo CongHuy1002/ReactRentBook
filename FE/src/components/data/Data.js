@@ -19,4 +19,16 @@ export const nav = [
       text: "contact",
       path: "/contact",
     },
+    {
+      text: "sign up",
+      path: "/signup",
+    },
+    {
+      text: "sign in",
+      path: "/signin",
+    },
+    {
+      text: "sign up email",
+      path: "/signupemail",
+    },
   ]
