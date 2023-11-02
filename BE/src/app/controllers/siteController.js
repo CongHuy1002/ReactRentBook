@@ -2,6 +2,7 @@ const Books = require('../model/Book');
 const Author = require('../model/Author');
 const Users = require('../model/User');
 const Orders = require('../model/Order');
+const Genres = require('../model/Genres');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 class siteController {
@@ -31,6 +32,10 @@ class siteController {
       if (req.body.author) {
         const author = Author.findById(req.body.author);
         await author.updateOne({ $push: { books: saveBook._id } });
+      }
+      if (req.body.genre) {
+        const genre = Genres.findById(req.body.genre);
+        await genre.updateOne({ $push: { books: saveBook._id } });
       }
       res.status(200).json(saveBook);
     } catch (err) {
