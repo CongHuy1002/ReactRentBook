@@ -108,6 +108,21 @@ const Details = () => {
           </TabPanels>
         </Tabs>
       </div>
+      <div className='related-product_container mt-4'>
+        <Heading>Sản phẩm liên quan</Heading>
+        <div className='row'>
+          <div className='col-lg-4'>
+            <Image
+              borderRadius={30}
+              src='https://cdn0.fahasa.com/media/catalog/product/d/a/dat_rung_phuong_nam_ban_dien_anh_bia.jpg'
+            />
+            <Heading size='md'>Tên sách</Heading>
+            <p>Mục đánh giá</p>
+            <p className='detail-content_cate m-0'>Tên tác giả</p>
+            <p className='detail_content-pirce'>7000</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
