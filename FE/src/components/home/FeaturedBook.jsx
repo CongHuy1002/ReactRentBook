@@ -1,7 +1,7 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Book } from "../data/Book";
-import BookItem from '../data/BookItem';
+// import BookItem from '../data/BookItem';
 
 import './featured.css'
 
@@ -21,7 +21,7 @@ const FeaturedBook = () => {
                 grabCursor={true}
                 centeredSlides={true}
                 loop={true}
-                slidesPerView={'auto'}
+                slidesPerView={3}
                 coverflowEffect={{
                   rotate: 0,
                   stretch: 0,
@@ -45,7 +45,7 @@ const FeaturedBook = () => {
                             <p></p>
                             <p> ${book.price} </p>
                         </div> */}
-                        <div className="">
+                        <div className="bookfeature">
                             <img src={book.image} alt='imgbook' />
                             <h1> {book.name} </h1>
                             <p></p>

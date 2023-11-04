@@ -37,31 +37,43 @@
 
 
 /* Container Styles */
-.container-featured {
+.swiper-featured-container {
   max-width: 124rem;
-  padding: 4rem 1rem;
-  margin: 0 auto;
+  height: 400px;
+  padding: 40px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 350px;
 }
 
 /* Heading Styles */
-.heading-feartured {
+.swiper-featured-title {
   padding: 1rem 0;
   font-size: 3.5rem;
   text-align: center;
 }
 
-/* Swiper Container Styles */
-.swiper_container {
-  height: 52rem;
-  padding: 2rem 0;
-  position: relative;
+.bookfeature{
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
+
+.bookfeature img {
+  height: 200px;
+  width: 300px;
+  display: block; 
+  margin: 0 auto; 
+}
+
 
 /* Swiper Slide Styles */
 .swiper-slide {
-  width: 37rem;
-  height: 42rem;
+  width: 300px;
+  height: 200px;
   position: relative;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 500px) {
@@ -81,8 +93,8 @@
 }
 
 .swiper-slide img {
-  width: 37rem;
-  height: 42rem;
+  width: 350px;
+  height: 450px;
   border-radius: 2rem;
   object-fit: cover;
 }
