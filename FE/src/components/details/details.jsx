@@ -20,9 +20,36 @@ import {
   Th,
   Td,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import './details.css';
 const Details = () => {
+    const { slug } = useParams(); // 'slug' is the name of the parameter you set in your route
+  const [datas, setDatas] = useState([]); // Initialize with an empty array
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const api = `http://localhost:5000/details/${slug}`;
+
+      try {
+        setIsLoading(true);
+        const response = await axios.get(api);
+        if (response.status !== 200) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        setDatas(response.data);
+      } catch (error) {
+        console.error('API request error:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []); // Empty dependency array for one-time execution
+  const books = datas.book;
   return (
     <div className='container mt-5'>
       <Grid templateColumns='repeat(2, 1fr)' gap={10}>

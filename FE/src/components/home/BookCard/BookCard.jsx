@@ -7,7 +7,7 @@ export function BookCard({ book }) {
   console.log('../../../../' + processedImages);
   const test = '2023-11-04T12-44-43.845Z-1.8934974155317.jpg';
   return (
-    <div className='bookItem mb-4 d-flex'>
+    <a href={`/details/${book.slug}`} className='bookItem mb-4 d-flex'>
       <img
         style={{ borderRadius: 30 }}
         className=''
@@ -19,6 +19,6 @@ export function BookCard({ book }) {
         <p>{book.author.name}</p>
         <p> ${book.price} </p>
       </div>
-    </div>
+    </a>
   );
 }

@@ -50,7 +50,7 @@ class siteController {
       const authorBook = await Books.find({ author: book.author._id }).lean();
       const addToCartAPI = process.env.addtocartAPI;
       console.log(authorBook);
-      res.render('details', {
+      res.status(200).json({
         book,
         authorBook,
         addToCartAPI,

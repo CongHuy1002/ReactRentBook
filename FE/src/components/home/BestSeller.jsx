@@ -30,10 +30,7 @@ const BestSeller = () => {
 
     fetchData();
   }, []); // Empty dependency array for one-time execution
-  console.log(datas.books);
   const books = datas.books;
-  // const test = datas.books.images.replace(/\\/g, '/');
-  // console.log(test);
   return (
     <>
       {isLoading ? (
