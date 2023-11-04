@@ -18,15 +18,15 @@ class siteController {
   }
   async postBook(req, res, next) {
     try {
-      const imageFiles = req.files['images']; // Retrieve the array of image files
-      const imageUrl = imageFiles.map((file) => file.path); // Map the paths of image files
-
-      const pdfFile = req.files['pdfFile'][0]; // Retrieve the single PDF file
-      const pdfUrl = pdfFile.path; // Get the path of the uploaded PDF file
+      // const imageFiles = req.files['images']; // Retrieve the array of image files
+      // const imageUrl = imageFiles.map((file) => file.path); // Map the paths of image files
+      const imageName = req.files['images'][0].filename;
+      const pdfFile = req.files['pdfFile'][0].filename; // Retrieve the single PDF file
+      // const pdfUrl = pdfFile.path; // Get the path of the uploaded PDF file
       const newBook = new Books({
         ...req.body,
-        images: imageUrl,
-        pdfFile: pdfUrl,
+        images: imageName,
+        pdfFile: pdfFile,
       });
       const saveBook = await newBook.save();
       if (req.body.author) {
