@@ -1,5 +1,23 @@
 .detail-image_container {
-  height: 900px;
+  height: 500px;
   border-radius: 30px;
   border: 1px solid;
+}
+
+.detail_content-pirce {
+  color: #f05b4d;
+}
+
+.detail-content_cate {
+  color: #a2a1a1;
+
+  font-size: 18px;
+}
+
+.Tab-pannel {
+  border-radius: 30px;
+}
+
+.table-header {
+  font-weight: bold;
 }
