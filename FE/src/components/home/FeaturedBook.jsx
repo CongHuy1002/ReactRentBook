@@ -69,12 +69,6 @@ const FeaturedBook = () => {
           >
             {books.map((book, key) => (
               <SwiperSlide key={key}>
-                {/* <div className='bookItem'>
-                            <img src={book.image} alt='imgbook' />
-                            <h1> {book.name} </h1>
-                            <p></p>
-                            <p> ${book.price} </p>
-                        </div> */}
                 <div className='bookfeature'>
                   <img
                     src={

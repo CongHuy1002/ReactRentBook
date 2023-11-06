@@ -1,5 +1,4 @@
 .detail-image_container {
-  height: 500px;
   border-radius: 30px;
   border: 1px solid;
 }
@@ -20,4 +19,9 @@
 
 .table-header {
   font-weight: bold;
+}
+
+.author-container {
+  border-right: 1px solid;
+  padding: 4px;
 }

@@ -16,14 +16,14 @@ class VerifyController {
         }
       });
     } else {
-      res.redirect('/loginform')
+      res.status(500).json('Login again');
     }
   };
 
   verifyAdmin = (req, res, next) => {
     this.verifyToken(req, res, () => {
       if (req.user.admin) {
-        res.redirect('/admin/stored/order')
+        res.redirect('/admin/stored/order');
       } else {
         next();
       }

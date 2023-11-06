@@ -4,11 +4,13 @@ const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
 const { text } = require('body-parser');
-const transporter = nodemailer.createTransport(sendgridTransport({
-  auth: {
-    api_key: process.env.sendgrid_apiKey
-  }
-}))
+const transporter = nodemailer.createTransport(
+  sendgridTransport({
+    auth: {
+      api_key: process.env.sendgrid_apiKey,
+    },
+  }),
+);
 let refreshTokenArray = [];
 class userController {
   async registerUsers(req, res, next) {
@@ -80,24 +82,22 @@ class userController {
   async userLogout(req, res) {
     try {
       res.clearCookie('refreshToken');
+      res.clearCookie('accessToken');
+      // Then perform the filter operations
       refreshTokenArray = refreshTokenArray.filter(
         (token) => token !== req.cookies.refreshToken,
-      );
-      res.clearCookie('accessToken');
-      accessToken = accessToken.filter(
-        (token) => token !== req.cookies.accessToken,
       );
       res.status(200).json('logged out !');
     } catch (err) {
       res.status(500).json(err);
+      console.log(err);
     }
   }
   async getAllUsers(req, res) {
     try {
       const users = await Users.find().lean();
       res.status(200).json(users);
-    }
-    catch (err) {
+    } catch (err) {
       res.status(500).json(err);
     }
   }
@@ -108,46 +108,49 @@ class userController {
     const gmailInput = req.body.gmail;
     console.log(gmailInput);
     Users.findOne({ gmail: gmailInput })
-      .then(user => {
+      .then((user) => {
         if (!user) {
           return res.status(403).json('Not find User');
         }
         const secret = process.env.JWT_ACCESS_TOKEN + user.password;
-        const token = jwt.sign({ gmailInput: user.gmailInput, id: user._id }, secret, {
-          expiresIn: '5m',
-        });
+        const token = jwt.sign(
+          { gmailInput: user.gmailInput, id: user._id },
+          secret,
+          {
+            expiresIn: '5m',
+          },
+        );
         const link = process.env.linkResetPasswordAPI + `${user._id}/${token}`;
         transporter.sendMail({
           to: gmailInput, //! gmailInput
           from: 'bestquangminh@gmail.com',
           subject: 'Link To Reset Password',
-          text: link
-        })
+          text: link,
+        });
         return res.status(200).json('success');
       })
-      .catch(err => {
+      .catch((err) => {
         res.status(500).json(err);
-      })
+      });
   }
   resetPassword(req, res) {
     const { id, token } = req.params;
-    Users.findOne({ _id: id })
-      .then(user => {
-        if (!user) {
-          return res.json('User not found');
-        }
-        const secret = process.env.JWT_ACCESS_TOKEN + user.password;
-        try {
-          const verify = jwt.verify(token, secret);
-          res.render('change-password', {
-            gmail: user.gmail,
-            id: user.id,
-            token: req.params.token
-          });
-        } catch (err) {
-          res.send('not verified');
-        }
-      })
+    Users.findOne({ _id: id }).then((user) => {
+      if (!user) {
+        return res.json('User not found');
+      }
+      const secret = process.env.JWT_ACCESS_TOKEN + user.password;
+      try {
+        const verify = jwt.verify(token, secret);
+        res.render('change-password', {
+          gmail: user.gmail,
+          id: user.id,
+          token: req.params.token,
+        });
+      } catch (err) {
+        res.send('not verified');
+      }
+    });
   }
   async postResetPassword(req, res) {
     const { id, token } = req.params;
@@ -162,18 +165,20 @@ class userController {
       const salt = await bcrypt.genSalt(10);
       const hash = await bcrypt.hash(password, salt);
       // Update the user's password with the hashed password
-      await Users.updateOne({ _id: id }, {
-        $set: {
-          password: hash,
+      await Users.updateOne(
+        { _id: id },
+        {
+          $set: {
+            password: hash,
+          },
         },
-      });
-      res.redirect('/')
+      );
+      res.redirect('/');
     } catch (err) {
       console.error(err);
       res.send('Not verified');
     }
   }
-
 }
 
 module.exports = new userController();
