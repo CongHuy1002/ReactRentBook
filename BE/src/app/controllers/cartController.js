@@ -28,6 +28,7 @@ class cartController {
       .exec()
       .then((user) => {
         const cartItems = user.cart.items;
+        console.log(cartItems);
         const cartItemCount = cartItems.length;
         let totalPrice = 0;
         cartItems.forEach((p) => {

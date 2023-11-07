@@ -73,6 +73,29 @@ class siteController {
       res.status(500).json(err);
     }
   }
+
+  async searchBook(req, res) {
+    try {
+      const query = req.query.q; // Retrieve the search query from the request URL query parameters
+
+      if (!query || query.trim() === '') {
+        return res.status(400).json({ message: 'Invalid search query' });
+      }
+
+      // Perform the search based on the query
+      const books = await Books.find({
+        $or: [
+          { name: { $regex: query, $options: 'i' } }, // Case-insensitive title search
+        ],
+      })
+        .populate('author')
+        .lean();
+
+      res.json({ books });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
   async myBook(req, res) {
     try {
       const user = await Users.findById(req.user.id);
