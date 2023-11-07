@@ -12,19 +12,18 @@ const Cart = () => {
       try {
         const res = await axios.get(
           'http://localhost:5000/cart/',
-          {},
+          {
+            headers: {
+              cookie: 'test',
+              access_token: localStorage.getItem('accessToken'),
+            },
+          },
           {
             withCredentials: true,
           },
         );
         if (res.status === 200) {
-          toast({
-            title: 'Logout successfully',
-            description: 'You have logged out successfully.',
-            status: 'success',
-            duration: 2000,
-            isClosable: true,
-          });
+          setDatas(res.data);
         }
       } catch (err) {
         console.log(err);
@@ -33,6 +32,7 @@ const Cart = () => {
 
     fetchData();
   }, []); // Empty dependency array for one-time execution
+  console.log(datas.totalPrice);
   return (
     <>
       {isLoading ? (

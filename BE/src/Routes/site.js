@@ -56,6 +56,7 @@ router.post(
 );
 router.get('/details/:slug', siteController.detailsBook);
 router.delete('/:id', siteController.deleteBook);
+router.get('/search', siteController.searchBook);
 router.get('/mybook', verifyController.verifyToken, siteController.myBook);
 router.post(
   '/postLinkBook',

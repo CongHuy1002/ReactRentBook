@@ -14,12 +14,12 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const app = express();
 const port = 5000;
-app.use(
-  cors({
-    origin: 'http://localhost:3000',
-    credentials: true,
-  }),
-);
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  credentials: true,
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 app.use(morgan('combined'));
 const route = require('./Routes/index');
 const db = require('./config/db');
