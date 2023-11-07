@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Book } from '../data/Book';
 import BookItem from '../data/BookItem';
-import { BookCard } from './BookCard/BookCard';
+import { BookCard } from '../home/BookCard/BookCard';
 import { Spinner } from '@chakra-ui/react';
-import '../styles/Book.css';
+import './Shop.css';
 import axios from 'axios';
 
-const BestSeller = () => {
+const Shop = () => {
   const [datas, setDatas] = useState([]); // Initialize with an empty array
   const [isLoading, setIsLoading] = useState(true);
 
@@ -36,16 +36,20 @@ const BestSeller = () => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className='menu container'>
-          <h1 className='menuTitle'>Best Sellers</h1>
-          <div className='row'>
-            {books.map((book) => (
-              <>
-                <div className='col-lg-4'>
-                  <BookCard book={book}></BookCard>
-                </div>
-              </>
-            ))}
+        <div className=''>
+          <div className='shop-header d-flex align-items-center mb-5'>
+            <h1 className='ml-5 fw-bold shop-header_text'>Shop</h1>
+          </div>
+          <div className='menu container'>
+            <div className='row'>
+              {books.map((book) => (
+                <>
+                  <div className='col-lg-4'>
+                    <BookCard book={book}></BookCard>
+                  </div>
+                </>
+              ))}
+            </div>
           </div>
         </div>
       )}
@@ -53,4 +57,4 @@ const BestSeller = () => {
   );
 };
 
-export default BestSeller;
+export default Shop;

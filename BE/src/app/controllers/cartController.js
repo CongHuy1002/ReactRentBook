@@ -5,79 +5,79 @@ class cartController {
     const productID = req.body.productID;
     if (productID) {
       Books.findById(productID)
-        .then(book => {
-          Users.findById(req.user.id)
-            .then(user => {
-              return user.addToCart(book);
-            })
+        .then((book) => {
+          Users.findById(req.user.id).then((user) => {
+            return user.addToCart(book);
+          });
         })
-        .then(result => {
-          res.redirect('back');
+        .then((result) => {
+          res
+            .status(200)
+            .json({ message: 'Added to cart successfully', result: result });
         })
-        .catch(err => { console.log(err) });
-    }
-    else {
-      return res.status(400).json({ message: "book not found" });
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      return res.status(400).json({ message: 'book not found' });
     }
   }
   async getCart(req, res) {
     Users.findById(req.user.id)
       .populate('cart.items.productID')
       .exec()
-      .then(user => {
+      .then((user) => {
         const cartItems = user.cart.items;
         const cartItemCount = cartItems.length;
         let totalPrice = 0;
-        cartItems.forEach(p => {
+        cartItems.forEach((p) => {
           totalPrice += p.productID.price;
-        })
-        res.render('cart', {
-          cartItems,
-          totalPrice,
-          cartItemCount
-        })
+        });
+        res.status(200).json({ cartItems, totalPrice, cartItemCount });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         res.status(500).json({ message: 'Server Error' });
       });
   }
-   postCart(req, res) {
-      const selectedDate = new Date(req.body.date);
-      console.log(selectedDate);
-      const currentDate = new Date();
-      selectedDate.setHours(0, 0, 0, 0);
-      currentDate.setHours(0, 0, 0, 0);
-      // Convert the time difference to days
-      const daysDifference = Math.ceil((selectedDate - currentDate) / (1000 * 3600 * 24));
-      Users.findById(req.user.id)
-        .then(user => {
-          user.updateToCart(selectedDate,daysDifference);
-          res.redirect('/order');
-        })
-        .then(()=> {
-          return res.status(200);
-        })
-        .catch(err => {
-          return res.json(err);
-        })
+  postCart(req, res) {
+    const selectedDate = new Date(req.body.date);
+    console.log(selectedDate);
+    const currentDate = new Date();
+    selectedDate.setHours(0, 0, 0, 0);
+    currentDate.setHours(0, 0, 0, 0);
+    // Convert the time difference to days
+    const daysDifference = Math.ceil(
+      (selectedDate - currentDate) / (1000 * 3600 * 24),
+    );
+    Users.findById(req.user.id)
+      .then((user) => {
+        user.updateToCart(selectedDate, daysDifference);
+        res.redirect('/order');
+      })
+      .then(() => {
+        return res.status(200);
+      })
+      .catch((err) => {
+        return res.json(err);
+      });
   }
   deleteItemsCart(req, res) {
     const productID = req.body.productId;
     if (productID) {
       Users.findById(req.user.id)
-        .then(user => {
+        .then((user) => {
           return user.removeFromCart(productID);
         })
-        .then(result => {
+        .then((result) => {
           res.redirect('back');
         })
-        .catch(err => { console.log(err) });
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      return res.status(400).json({ message: 'Course not found' });
     }
-    else {
-      return res.status(400).json({ message: "Course not found" });
-    }
-
   }
   postPaymentUrl(req, res, next) {
     process.env.TZ = 'Asia/Ho_Chi_Minh';
@@ -85,7 +85,8 @@ class cartController {
     let date = new Date();
     let createDate = moment(date).format('YYYYMMDDHHmmss');
 
-    let ipAddr = req.headers['x-forwarded-for'] ||
+    let ipAddr =
+      req.headers['x-forwarded-for'] ||
       req.connection.remoteAddress ||
       req.socket.remoteAddress ||
       req.connection.socket.remoteAddress;
@@ -126,15 +127,14 @@ class cartController {
 
     let querystring = require('qs');
     let signData = querystring.stringify(vnp_Params, { encode: false });
-    let crypto = require("crypto");
-    let hmac = crypto.createHmac("sha512", secretKey);
-    let signed = hmac.update(new Buffer(signData, 'utf-8')).digest("hex");
+    let crypto = require('crypto');
+    let hmac = crypto.createHmac('sha512', secretKey);
+    let signed = hmac.update(new Buffer(signData, 'utf-8')).digest('hex');
     vnp_Params['vnp_SecureHash'] = signed;
     vnpUrl += '?' + querystring.stringify(vnp_Params, { encode: false });
 
-    res.redirect(vnpUrl)
+    res.redirect(vnpUrl);
   }
-
 }
 
 module.exports = new cartController();

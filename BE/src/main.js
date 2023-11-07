@@ -14,7 +14,12 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const app = express();
 const port = 5000;
-app.use(cors());
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+  }),
+);
 app.use(morgan('combined'));
 const route = require('./Routes/index');
 const db = require('./config/db');
@@ -28,20 +33,20 @@ app.engine(
     helpers: {
       sum: (a, b) => a + b,
     },
-  })
+  }),
 );
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'Resources/views'));
 app.use('/src/public/', express.static(path.join(__dirname, 'public/')));
 app.use(
   '/src/public/images',
-  express.static(path.join(__dirname, 'public/images'))
+  express.static(path.join(__dirname, 'public/images')),
 );
 app.use('/src/public/PDF', express.static(path.join(__dirname, 'public/PDF')));
 app.use(
   express.urlencoded({
     extended: true,
-  })
+  }),
 );
 app.use(cookieParser());
 app.use(express.json());

@@ -1,8 +1,8 @@
 import React from 'react';
 import Carousel from 'react-elastic-carousel';
-import "./genres.css";
+import './genres.css';
 import Genres from '../data/Genres';
-import { genresname } from "../data/Genresname";
+import { genresname } from '../data/Genresname';
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
@@ -14,15 +14,21 @@ const breakPoints = [
 const GenresBook = () => {
   return (
     <>
-      <h1 style={{ textAlign: "left", marginLeft: 50 }}>Genres Book</h1>
-      <div className="GenresBook">
-        <Carousel breakPoints={breakPoints}
+      <h1 style={{ textAlign: 'left', marginLeft: 50 }}>Genres Book</h1>
+      <div className='GenresBook mb-4'>
+        <Carousel
+          breakPoints={breakPoints}
           disableArrowsOnEnd={true}
           showArrows={false}
           pagination={false}
         >
-          {genresname.map((genresname, index) => ( 
-            <Genres key={index} genresname={genresname.genresname} image={genresname.image} />
+          {genresname.map((genresname, index, id) => (
+            <Genres
+              key={index}
+              genresname={genresname.genresname}
+              image={genresname.image}
+              id={genresname.id}
+            />
           ))}
         </Carousel>
       </div>

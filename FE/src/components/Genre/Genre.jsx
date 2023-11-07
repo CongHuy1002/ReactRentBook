@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Book } from '../data/Book';
 import BookItem from '../data/BookItem';
-import { BookCard } from './BookCard/BookCard';
+import { BookCard } from '../home/BookCard/BookCard';
 import { Spinner } from '@chakra-ui/react';
-import '../styles/Book.css';
+import '../Shop/Shop.css';
 import axios from 'axios';
-
-const BestSeller = () => {
+import { Routes, Route, useParams } from 'react-router-dom';
+const Genre = () => {
   const [datas, setDatas] = useState([]); // Initialize with an empty array
   const [isLoading, setIsLoading] = useState(true);
-
+  const { id } = useParams();
+  console.log(id);
   useEffect(() => {
     const fetchData = async () => {
-      const api = 'http://localhost:5000/';
+      const api = `http://localhost:5000/genre/${id}`;
 
       try {
         setIsLoading(true);
@@ -30,22 +30,26 @@ const BestSeller = () => {
 
     fetchData();
   }, []); // Empty dependency array for one-time execution
-  const books = datas.books;
+  const books = datas.genresBook;
   return (
     <>
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className='menu container'>
-          <h1 className='menuTitle'>Best Sellers</h1>
-          <div className='row'>
-            {books.map((book) => (
-              <>
-                <div className='col-lg-4'>
-                  <BookCard book={book}></BookCard>
-                </div>
-              </>
-            ))}
+        <div className=''>
+          <div className='shop-header d-flex align-items-center mb-5'>
+            <h1 className='fw-bold shop-header_text'>Shop</h1>
+          </div>
+          <div className='menu container'>
+            <div className='row'>
+              {books.map((book) => (
+                <>
+                  <div className='col-lg-4'>
+                    <BookCard book={book}></BookCard>
+                  </div>
+                </>
+              ))}
+            </div>
           </div>
         </div>
       )}
@@ -53,4 +57,4 @@ const BestSeller = () => {
   );
 };
 
-export default BestSeller;
+export default Genre;

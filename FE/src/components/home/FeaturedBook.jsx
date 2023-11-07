@@ -13,7 +13,7 @@ const FeaturedBook = () => {
   const [slidesPerView, setSlidesPerView] = useState(3);
 
   useEffect(() => {
-   
+    // Update slidesPerView based on screen width
     const updateSlidesPerView = () => {
       if (window.innerWidth <= 800) {
         setSlidesPerView(1);
@@ -22,17 +22,18 @@ const FeaturedBook = () => {
       }
     };
 
-   
+    // Initially set slidesPerView
     updateSlidesPerView();
 
-   
+    // Add a resize event listener to adjust slidesPerView on window resize
     window.addEventListener('resize', updateSlidesPerView);
 
-  
+    // Remove the event listener when the component unmounts
     return () => {
       window.removeEventListener('resize', updateSlidesPerView);
     };
   }, []);
+
   return (
     <div className="swiper-featured-container">
       <h1 className="swiper-featured-title">Featured Book</h1>
@@ -41,7 +42,7 @@ const FeaturedBook = () => {
         grabCursor={true}
         centeredSlides={true}
         loop={true}
-        slidesPerView={slidesPerView} 
+        slidesPerView={slidesPerView}
         coverflowEffect={{
           rotate: 0,
           stretch: 0,

@@ -33,8 +33,8 @@ class siteController {
         const author = Author.findById(req.body.author);
         await author.updateOne({ $push: { books: saveBook._id } });
       }
-      if (req.body.genre) {
-        const genre = Genres.findById(req.body.genre);
+      if (req.body.genres) {
+        const genre = Genres.findById(req.body.genres);
         await genre.updateOne({ $push: { books: saveBook._id } });
       }
       res.status(200).json(saveBook);
@@ -48,17 +48,19 @@ class siteController {
         .lean()
         .populate('author');
       const authorBook = await Books.find({ author: book.author._id }).lean();
+      const genres = await Genres.findById(book.genres._id).lean();
       const addToCartAPI = process.env.addtocartAPI;
-      console.log(authorBook);
-      res.render('details', {
+      res.status(200).json({
         book,
         authorBook,
         addToCartAPI,
+        genres,
       });
     } catch (err) {
       res.status(500).json(err);
     }
   }
+
   async deleteBook(req, res) {
     try {
       await Author.updateMany(

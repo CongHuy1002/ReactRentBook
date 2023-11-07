@@ -7,7 +7,11 @@ const router = express.Router();
 router.post('/addcart', verifyController.verifyToken, cartController.addCart);
 router.get('/', verifyController.verifyToken, cartController.getCart);
 router.post('/postcart', verifyController.verifyToken, cartController.postCart);
-router.post('/deleteCartItem',verifyController.verifyToken, cartController.deleteItemsCart);
+router.post(
+  '/deleteCartItem',
+  verifyController.verifyToken,
+  cartController.deleteItemsCart,
+);
 router.post('/create_payment_url', cartController.postPaymentUrl);
 
 //*VNPAY
