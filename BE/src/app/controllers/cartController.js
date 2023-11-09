@@ -1,5 +1,6 @@
 const Users = require('../model/User');
 const Books = require('../model/Book');
+const jwt = require('jsonwebtoken');
 class cartController {
   addCart(req, res, next) {
     const productID = req.body.productID;
@@ -54,31 +55,37 @@ class cartController {
     Users.findById(req.user.id)
       .then((user) => {
         user.updateToCart(selectedDate, daysDifference);
-        res.redirect('/order');
-      })
-      .then(() => {
-        return res.status(200);
+        res.status(200).json('ok');
       })
       .catch((err) => {
         return res.json(err);
       });
   }
-  deleteItemsCart(req, res) {
+  deleteItemsCart(req, res, next) {
     const productID = req.body.productId;
-    if (productID) {
-      Users.findById(req.user.id)
-        .then((user) => {
-          return user.removeFromCart(productID);
-        })
-        .then((result) => {
-          res.redirect('back');
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      return res.status(400).json({ message: 'Course not found' });
-    }
+    const token = req.cookies.accessToken;
+
+    jwt.verify(token, process.env.JWT_ACCESS_TOKEN, (err, user) => {
+      if (err) {
+        console.log(err);
+        res.status(403).json('Token is not valid');
+      } else {
+        req.user = user;
+        if (productID) {
+          Users.findById(req.user.id)
+            .then((user) => {
+              user.removeFromCart(productID);
+              res.status(200).json('delete success');
+            })
+            .catch((err) => {
+              console.log(err);
+              res.status(500).json({ message: 'Internal Server Error' });
+            });
+        } else {
+          res.status(400).json({ message: 'Product ID not provided' });
+        }
+      }
+    });
   }
   postPaymentUrl(req, res, next) {
     process.env.TZ = 'Asia/Ho_Chi_Minh';

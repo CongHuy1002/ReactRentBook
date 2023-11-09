@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Book } from '../data/Book';
 import BookItem from '../data/BookItem';
 import { BookCard } from './BookCard/BookCard';
-import { Spinner } from '@chakra-ui/react';
+import { Center, Spinner } from '@chakra-ui/react';
 import '../styles/Book.css';
 import axios from 'axios';
 
@@ -34,7 +34,9 @@ const BestSeller = () => {
   return (
     <>
       {isLoading ? (
-        <Spinner />
+        <Center>
+          <Spinner />
+        </Center>
       ) : (
         <div className='menu container'>
           <h1 className='menuTitle'>Best Sellers</h1>
