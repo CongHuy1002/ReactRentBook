@@ -13,8 +13,34 @@ import 'swiper/css/scrollbar';
 
 import { Navigation, Pagination, EffectCoverflow } from 'swiper/modules';
 import { Center, Spinner } from '@chakra-ui/react';
+import { color } from 'framer-motion';
 
 const FeaturedBook = () => {
+
+  const [slidesPerView, setSlidesPerView] = useState(3);
+
+  useEffect(() => {
+    // Update slidesPerView based on screen width
+    const updateSlidesPerView = () => {
+      if (window.innerWidth <= 800) {
+        setSlidesPerView(1);
+      } else {
+        setSlidesPerView(3);
+      }
+    };
+
+    // Initially set slidesPerView
+    updateSlidesPerView();
+
+    // Add a resize event listener to adjust slidesPerView on window resize
+    window.addEventListener('resize', updateSlidesPerView);
+
+    // Remove the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('resize', updateSlidesPerView);
+    };
+  }, []);
+
   const [datas, setDatas] = useState([]); // Initialize with an empty array
   const [isLoading, setIsLoading] = useState(true);
 
@@ -53,7 +79,7 @@ const FeaturedBook = () => {
             grabCursor={true}
             centeredSlides={true}
             loop={true}
-            slidesPerView={3}
+             slidesPerView={slidesPerView}
             coverflowEffect={{
               rotate: 0,
               stretch: 0,
@@ -80,7 +106,7 @@ const FeaturedBook = () => {
                   />
                   <h1> {book.name} </h1>
                   <p></p>
-                  <p> ${book.price} </p>
+                  <p className='price'> <b>${book.price} </b>  </p>
                 </div>
               </SwiperSlide>
             ))}

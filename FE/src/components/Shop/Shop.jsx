@@ -5,6 +5,9 @@ import { BookCard } from '../home/BookCard/BookCard';
 import { Spinner } from '@chakra-ui/react';
 import './Shop.css';
 import axios from 'axios';
+import SortbyPrice from '../SortByPrice/SortbyPrice';
+import SortByName from '../SortbyName/SortByName';
+
 
 const Shop = () => {
   const [datas, setDatas] = useState([]); // Initialize with an empty array
@@ -39,6 +42,10 @@ const Shop = () => {
         <div className=''>
           <div className='shop-header d-flex align-items-center mb-5'>
             <h1 className='ml-5 fw-bold shop-header_text'>Shop</h1>
+          </div>
+          <div className='sort'>
+              <SortbyPrice />
+              <SortByName />
           </div>
           <div className='menu container'>
             <div className='row'>
