@@ -12,7 +12,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 import { Navigation, Pagination, EffectCoverflow } from 'swiper/modules';
-import { Spinner } from '@chakra-ui/react';
+import { Center, Spinner } from '@chakra-ui/react';
 
 const FeaturedBook = () => {
   const [datas, setDatas] = useState([]); // Initialize with an empty array
@@ -42,7 +42,9 @@ const FeaturedBook = () => {
   return (
     <>
       {isLoading ? (
-        <Spinner />
+        <Center>
+          <Spinner />
+        </Center>
       ) : (
         <div className='swiper-featured-container'>
           <h1 className='swiper-featured-title'>Featured Book</h1>

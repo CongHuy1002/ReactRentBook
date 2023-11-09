@@ -57,3 +57,11 @@ button i {
 .heading p {
   color: #72809d;
 }
+p {
+  margin: 0;
+  padding: 0;
+}
+span {
+  margin: 0;
+  padding: 0;
+}
