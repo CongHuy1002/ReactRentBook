@@ -8,8 +8,10 @@ import axios from 'axios';
 
 const Header = () => {
   const [isNavVisible, setIsNavVisible] = useState(false);
+  const [isLogin, SetisLogin] = useState(false);
   const history = useHistory();
   const accessToken = localStorage.getItem('accessToken');
+
   const handleLogout = async (e) => {
     e.preventDefault();
     try {
