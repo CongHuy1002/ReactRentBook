@@ -59,9 +59,9 @@ const Header = () => {
         </nav>
 
         <div className='actions flex'>
-          <button className='action-btn' aria-label='Search'>
+        <Link to='/search' className='action-btn' aria-label='Search'>
             <i className='fa-solid fa-magnifying-glass'></i>
-          </button>
+        </Link>
           <div className='user-menu'>
             <button
               className='action-btn dropdown-toggle'

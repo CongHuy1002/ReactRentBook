@@ -45,22 +45,22 @@ const Signin = () => {
     <div className='login template d-flex justify-content-center align-items-center 100-vh p-5'>
       <div className='form_container p-5 rounded '>
         <form onSubmit={handleSubmit}>
-          <h3 className='text-center'>Sign In</h3>
+          <h3 className='text-center'>Sign in</h3>
           <div className='mb-2'>
-            <label htmlFor='username'>Username</label>
+            <label htmlFor='username'><b>Username</b></label>
             <input
               type='text'
-              placeholder='Nhập tài khoản'
+              placeholder='Enter your username'
               className='form-control'
               value={username}
               onChange={(e) => Setusername(e.target.value)}
             />
           </div>
           <div className='mb-2'>
-            <label htmlFor='password'>Password</label>
+            <label htmlFor='password'><b>Password</b></label>
             <input
               type='password'
-              placeholder='Nhập mật khẩu'
+              placeholder='Enter your password'
               className='form-control'
               value={password}
               onChange={(e) => Setpassword(e.target.value)}

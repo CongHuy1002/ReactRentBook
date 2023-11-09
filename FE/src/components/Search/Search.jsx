@@ -3,6 +3,7 @@ import { Container, Grid, GridItem, Input, Spinner } from '@chakra-ui/react';
 import { useDebounce } from 'use-debounce';
 import axios from 'axios';
 import { BookCard } from '../home/BookCard/BookCard';
+import './search.css'
 export function Search() {
   const [searchedBooks, setSearchedBooks] = useState([]);
   const [query, setQuery] = useState('');
@@ -29,21 +30,30 @@ export function Search() {
   }, [debouncedValue]);
   return (
     <>
-      <Container maxW='1440px' pt='125px'>
-        <Input
-          mb='24px'
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder='Find movies'
-          _placeholder={{ opacity: 0.4, color: 'inherit' }}
-        />
-        <Grid templateColumns='repeat(3,1fr)' gap={5}>
-          {searchedBooks.map((book) => (
-            <GridItem key={book.id}>
-              <BookCard book={book}></BookCard>
-            </GridItem>
-          ))}
-        </Grid>
-      </Container>
+      <div className="search">
+        <Container maxW='1440px' pt='125px'>
+          <div className="title">
+            <h2>Tìm Kiếm Sách</h2>
+          </div>
+          <Input
+            mb='24px'
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder='Find your books'
+            _placeholder={{ opacity: 0.4, color: 'inherit' }}
+          />
+          <Grid
+            templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }}
+            gap={5}
+            className='booksearch'
+          >
+            {searchedBooks.map((book) => (
+              <GridItem key={book.id}>
+                <BookCard book={book}></BookCard>
+              </GridItem>
+            ))}
+          </Grid>
+        </Container>
+      </div>
     </>
   );
 }

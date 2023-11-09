@@ -5,3 +5,14 @@
 .shop-header_text {
   font-size: 96px;
 }
+.sort{
+  display: flex;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 800px) {
+  .sort{
+    display: flex;
+    margin-bottom: 30px;
+  }
+}
