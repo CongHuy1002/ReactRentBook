@@ -4,6 +4,8 @@ import BestSeller from './BestSeller'
 import GenresBook from './GenresBook'
 import FeaturedBook from './FeaturedBook'
 import { CustomerCard } from './CustomerCard'
+import CustomerQuestion from "./CustomerQuestion"
+import DiscountFooter from "./DiscountFooter"
 
 const Home = () => {
   return (
@@ -13,6 +15,8 @@ const Home = () => {
       <GenresBook />
       <FeaturedBook />
       <CustomerCard/>
+      <CustomerQuestion/>
+      <DiscountFooter />
     </div>
   )
 }
