@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Spinner, useToast } from '@chakra-ui/react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import './Cart.css';
 
 const Cart = () => {
@@ -8,6 +9,7 @@ const Cart = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [date, setDate] = useState();
   const toast = useToast();
+  const history = useHistory();
   const handleDeleteBtn = async (e, id) => {
     try {
       const res = await axios.post(
@@ -48,9 +50,16 @@ const Cart = () => {
         },
       );
       if (res.status === 200) {
-        console.log('ok');
+        history.push('cart/payment');
       }
     } catch (err) {}
+  };
+
+  const formatPrice = async (price) => {
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND', // Change to your preferred currency if needed
+    }).format(price);
   };
 
   useEffect(() => {

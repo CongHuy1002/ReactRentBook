@@ -2,21 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { Book } from '../data/Book';
 import BookItem from '../data/BookItem';
 import { BookCard } from '../home/BookCard/BookCard';
-import { Spinner } from '@chakra-ui/react';
+import { Spinner, Select } from '@chakra-ui/react';
 import './Shop.css';
 import axios from 'axios';
-import SortbyPrice from '../SortByPrice/SortbyPrice';
-import SortByName from '../SortbyName/SortByName';
-
 
 const Shop = () => {
   const [datas, setDatas] = useState([]); // Initialize with an empty array
   const [isLoading, setIsLoading] = useState(true);
+  const [sortName, setSortName] = useState('');
+  const [sortPrice, setSortPrice] = useState('');
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      const api = 'http://localhost:5000/';
-
+      const api = `http://localhost:5000/?sortPrice=${sortPrice}&sortName=${sortName}`;
       try {
         setIsLoading(true);
         const response = await axios.get(api);
@@ -32,7 +31,7 @@ const Shop = () => {
     };
 
     fetchData();
-  }, []); // Empty dependency array for one-time execution
+  }, [sortName, sortPrice]); // Empty dependency array for one-time execution
   const books = datas.books;
   return (
     <>
@@ -44,8 +43,60 @@ const Shop = () => {
             <h1 className='ml-5 fw-bold shop-header_text'>Shop</h1>
           </div>
           <div className='sort'>
-              <SortbyPrice />
-              <SortByName />
+            <Select
+              onChange={(e) => setSortPrice(e.target.value)}
+              bgColor='#fff'
+              color='#000'
+              w='md'
+            >
+              <option value='none' selected disabled>
+                Sort by price
+              </option>
+              <option value='desc'>From Highest to Lowest</option>
+              <option value='asc'>From Lowest to Highest</option>
+            </Select>
+            <Select
+              onChange={(e) => setSortName(e.target.value)}
+              bgColor='#fff'
+              color='#000'
+              w='md'
+            >
+              <option value='none' selected disabled>
+                Sort by name
+              </option>
+              <option value='asc'>From A to Z</option>
+              <option value='desc'>From Z to A</option>
+            </Select>
+            {/* <div className='dropdown'>
+              <div
+                className='dropdown-btn'
+                onClick={(e) => setIsActive(!isActive)}
+              >
+                Sort by Price
+                <span className='fas fa-caret-down'></span>
+              </div>
+              {isActive && (
+                <div className='dropdown-content'>
+                  <div className='dropdown-item'>Giá thấp tới cao</div>
+                  <div className='dropdown-item'>Giá cao tới thấp</div>
+                </div>
+              )}
+            </div>
+            <div className='dropdown'>
+              <div
+                className='dropdown-btn'
+                onClick={(e) => setIsActive(!isActive)}
+              >
+                Sort by Name
+                <span className='fas fa-caret-down'></span>
+              </div>
+              {isActive && (
+                <div className='dropdown-content'>
+                  <div className='dropdown-item'>Từ A đến Z</div>
+                  <div className='dropdown-item'>Từ Z đến A</div>
+                </div>
+              )}
+            </div> */}
           </div>
           <div className='menu container'>
             <div className='row'>

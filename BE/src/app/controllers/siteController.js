@@ -9,13 +9,28 @@ class siteController {
   async index(req, res, next) {
     try {
       const addtocartAPI = process.env.addtocartAPI;
-      const books = await Books.find().populate('author').lean();
+      const sortPrice = req.query.sortPrice;
+      const sortName = req.query.sortName;
+
+      let sortCriteria = {};
+      if (sortPrice === 'asc' || sortPrice === 'desc') {
+        sortCriteria.price = sortPrice === 'asc' ? 1 : -1;
+      }
+      if (sortName === 'asc' || sortName === 'desc') {
+        sortCriteria.name = sortName === 'asc' ? 1 : -1; // Assuming 'title' is the field name for book titles
+      }
+
+      const books = await Books.find()
+        .populate('author')
+        .sort(sortCriteria)
+        .lean();
       const author = await Author.find().lean();
       res.json({ author, books, addtocartAPI });
-    } catch {
-      res.status(500);
+    } catch (error) {
+      res.status(500).send(error.message);
     }
   }
+
   async postBook(req, res, next) {
     try {
       // const imageFiles = req.files['images']; // Retrieve the array of image files
@@ -98,21 +113,39 @@ class siteController {
   }
   async myBook(req, res) {
     try {
-      const user = await Users.findById(req.user.id);
-      const order = await Orders.find({ 'user.userID': user._id });
-      const productDataArray = order.map((order) =>
-        order.products.map((product) => product.productData),
-      );
-      const timerent = order.map((order) =>
-        order.products.map((product) => product.timerent),
-      );
-      console.log(timerent);
-      return res.render('myBook', {
-        productDataArray,
-        timerent,
+      console.log(req.headers.access_token);
+      const token = req.headers.access_token; // Ensure token is defined
+      // Verify the token asynchronously
+      jwt.verify(token, process.env.JWT_ACCESS_TOKEN, async (err, user) => {
+        if (err) {
+          console.log(err);
+          return res.status(403).json('Token is not valid');
+        }
+
+        // Once the token is verified, proceed with the rest of the function
+        try {
+          const foundUser = await Users.findById(user.id);
+          const orders = await Orders.find({ 'user.userID': foundUser._id });
+
+          const productDataArray = orders.map((order) =>
+            order.products.map((product) => product.productData),
+          );
+
+          const timerent = orders.map((order) =>
+            order.products.map((product) => product.timerent),
+          );
+
+          console.log(timerent);
+          return res.status(200).json({ productDataArray, timerent });
+        } catch (innerErr) {
+          // Handle any errors that occur while fetching user or orders
+          console.error(innerErr);
+          return res.status(500).json('Internal Server Error');
+        }
       });
     } catch (err) {
-      res.status(500).json({ message: 'Server Error' });
+      console.error(err);
+      res.status(500).json('Internal Server Error');
     }
   }
 
@@ -121,7 +154,6 @@ class siteController {
       const productId = req.body.productID;
       const user = await Users.findById(req.user.id);
       const order = await Orders.findOne({ 'user.userID': user._id });
-      console.log(order);
       if (!user) {
         return res.status(403).json('Not find User');
       }

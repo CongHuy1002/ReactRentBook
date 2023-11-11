@@ -8,7 +8,10 @@ import Signin from '../signin/Signin';
 import Shop from '../Shop/Shop';
 import Genre from '../Genre/Genre';
 import Cart from '../Cart/Cart';
+import SignupEmail from '../signupwithemail/SignupEmail';
 import { Search } from '../Search';
+import MyBook from '../MyBook/MyBook';
+import Payment from '../Payment/Payment';
 import Footer from '../common/footer/Footer';
 const Pages = () => {
   return (
@@ -22,7 +25,9 @@ const Pages = () => {
           <Route exact path='/shop' component={Shop} />
           <Route exact path='/genre/:id' component={Genre} />
           <Route exact path='/cart' component={Cart} />
+          <Route exact path='/cart/payment' component={Payment} />
           <Route exact path='/search' component={Search} />
+          <Route exact path='/profile' component={MyBook} />
         </Switch>
         <Footer />
       </Router>

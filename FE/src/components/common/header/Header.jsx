@@ -51,7 +51,7 @@ const Header = () => {
         </div>
 
         <nav className={isNavVisible ? 'nav small' : 'nav'}>
-          <ul className='flex'>
+          <ul className='d-flex gap-5 p-0'>
             {nav.map((item, index) => (
               <li key={index}>
                 <Link to={item.path}>{item.text}</Link>
@@ -60,10 +60,10 @@ const Header = () => {
           </ul>
         </nav>
 
-        <div className='actions flex'>
-        <Link to='/search' className='action-btn' aria-label='Search'>
+        <div className='d-flex gap-2 align-items-center'>
+          <Link to='/search' className='action-btn' aria-label='Search'>
             <i className='fa-solid fa-magnifying-glass'></i>
-        </Link>
+          </Link>
           <div className='user-menu'>
             <button
               className='action-btn dropdown-toggle'
