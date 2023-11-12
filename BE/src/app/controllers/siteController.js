@@ -113,8 +113,8 @@ class siteController {
   }
   async myBook(req, res) {
     try {
-      console.log(req.headers.access_token);
       const token = req.headers.access_token; // Ensure token is defined
+
       // Verify the token asynchronously
       jwt.verify(token, process.env.JWT_ACCESS_TOKEN, async (err, user) => {
         if (err) {
@@ -127,16 +127,16 @@ class siteController {
           const foundUser = await Users.findById(user.id);
           const orders = await Orders.find({ 'user.userID': foundUser._id });
 
-          const productDataArray = orders.map((order) =>
-            order.products.map((product) => product.productData),
+          // Constructing an array of products with their timerent
+          const productsWithTimerent = orders.flatMap((order) =>
+            order.products.map((product) => ({
+              ...product.productData,
+              timerent: product.timerent,
+            })),
           );
 
-          const timerent = orders.map((order) =>
-            order.products.map((product) => product.timerent),
-          );
-
-          console.log(timerent);
-          return res.status(200).json({ productDataArray, timerent });
+          console.log(productsWithTimerent);
+          return res.status(200).json({ productsWithTimerent });
         } catch (innerErr) {
           // Handle any errors that occur while fetching user or orders
           console.error(innerErr);
@@ -161,9 +161,9 @@ class siteController {
       const token = jwt.sign({ id: user._id, productId }, secret, {
         expiresIn: '5m',
       });
-      const url = `http://localhost:3000/readbook/${user._id}/${token}`;
+      const url = `http://localhost:5000/readbook/${user._id}/${token}`;
       console.log(url);
-      return res.status(200).json({ url });
+      return res.status(200).json(url);
     } catch (err) {
       return res.status(500).json(err);
     }

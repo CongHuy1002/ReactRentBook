@@ -31,8 +31,6 @@ export default function StarRating({
     fontSize: `${size / 1.5}px`,
   };
 
-  console.log(rating);
-
   return (
     <div style={containerStyle}>
       {Array.from({ length: maxRating }, (_, index) => {

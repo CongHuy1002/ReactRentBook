@@ -16,9 +16,13 @@ import { Center, Spinner } from '@chakra-ui/react';
 import { color } from 'framer-motion';
 
 const FeaturedBook = () => {
-
   const [slidesPerView, setSlidesPerView] = useState(3);
-
+  const formatPriceVND = (price) => {
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND',
+    }).format(price);
+  };
   useEffect(() => {
     // Update slidesPerView based on screen width
     const updateSlidesPerView = () => {
@@ -79,7 +83,7 @@ const FeaturedBook = () => {
             grabCursor={true}
             centeredSlides={true}
             loop={true}
-             slidesPerView={slidesPerView}
+            slidesPerView={slidesPerView}
             coverflowEffect={{
               rotate: 0,
               stretch: 0,
@@ -106,7 +110,12 @@ const FeaturedBook = () => {
                   />
                   <h1> {book.name} </h1>
                   <p></p>
-                  <p className='price'> <b>${book.price} </b>  </p>
+                  <p className='price'>
+                    {' '}
+                    <b>
+                      {book && book.price ? formatPriceVND(book.price) : ''}{' '}
+                    </b>
+                  </p>
                 </div>
               </SwiperSlide>
             ))}

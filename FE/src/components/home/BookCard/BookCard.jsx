@@ -1,6 +1,12 @@
 import '../../styles/Book.css';
 import './BookCard.css';
 export function BookCard({ book }) {
+  const formatPriceVND = (price) => {
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND',
+    }).format(price);
+  };
   return (
     <a href={`/details/${book.slug}`} className='bookItem mb-4 d-flex'>
       <img
@@ -12,7 +18,9 @@ export function BookCard({ book }) {
       <div className='p-3'>
         <h3> {book.name} </h3>
         <p className='author-name'>{book.author.name}</p>
-        <p className='price'> ${book.price} </p>
+        <p className='price'>
+          {book && book.price ? formatPriceVND(book.price) : ''}{' '}
+        </p>
       </div>
     </a>
   );

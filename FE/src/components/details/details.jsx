@@ -31,7 +31,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import StarRating from '../StarsRating/StarsRating';
 const Details = () => {
   const { slug } = useParams(); // 'slug' is the name of the parameter you set in your route
-  const [datas, setDatas] = useState([]); // Initialize with an empty array
+  const [datas, setDatas] = useState([]);
+  // const [genres, setGenres] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [userRating, setUserRating] = useState('');
   const toast = useToast();
@@ -46,7 +47,6 @@ const Details = () => {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         setDatas(response.data);
-        console.log(response.data.genres);
       } catch (error) {
         console.error('API request error:', error);
       } finally {
@@ -58,7 +58,9 @@ const Details = () => {
   }, []); // Empty dependency array for one-time execution
   const books = datas.book;
   const authorBook = datas.authorBook;
-  // const genres = datas.genres;
+
+  // setGenres(datas.genres.name);
+  const genres = datas.genres;
   // const genresName = genres.name;
   const addToCartSubmit = async (id) => {
     try {
@@ -73,8 +75,8 @@ const Details = () => {
       );
       if (res.status === 200) {
         toast({
-          title: 'Thêm giỏ hàng thành công',
-          description: 'Bạn đã thêm sản phẩm vào giỏ hàng',
+          title: 'Add Item to your Cart Successfully',
+          description: 'You have successfully added your item to your cart',
           status: 'success',
           duration: 9000,
           isClosable: true,
@@ -83,6 +85,12 @@ const Details = () => {
     } catch (err) {
       console.log(err);
     }
+  };
+  const formatPriceVND = (price) => {
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND',
+    }).format(price);
   };
   return (
     <>
@@ -119,7 +127,9 @@ const Details = () => {
                 </div>
                 <Divider />
                 <div className='p-3 mb-5'>
-                  <h1 className='detail_content-pirce'>{books.price}</h1>
+                  <h1 className='detail_content-pirce'>
+                    {books && books.price ? formatPriceVND(books.price) : ''}
+                  </h1>
                   <div className='d-flex align-items-center gap-3'>
                     <div
                       class='btn w-100 detail-content_btn btn-outline-danger'
@@ -135,8 +145,10 @@ const Details = () => {
                 </div>
                 <Divider />
                 <div className='d-flex align-items-center'>
-                  <p className='detail-content_cate m-0'>Thể loại:</p>
-                  <span></span>
+                  <p className='detail-content_cate m-0 p-2'>Thể loại:</p>
+                  <p className=' text-black fw-bold m-0 p-2'>
+                    {genres == undefined ? <Spinner /> : genres.name}
+                  </p>
                 </div>
               </div>
             </GridItem>
@@ -196,7 +208,9 @@ const Details = () => {
                     <p className='detail-content_cate m-0'>
                       {books.author.name}
                     </p>
-                    <p className='detail_content-pirce'>{book.price}</p>
+                    <p className='detail_content-pirce'>
+                      {book.price ? formatPriceVND(book.price) : ''}
+                    </p>
                   </a>
                 </SwiperSlide>
               ))}

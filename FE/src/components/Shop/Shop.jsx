@@ -11,7 +11,6 @@ const Shop = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [sortName, setSortName] = useState('');
   const [sortPrice, setSortPrice] = useState('');
-  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,36 +66,6 @@ const Shop = () => {
               <option value='asc'>From A to Z</option>
               <option value='desc'>From Z to A</option>
             </Select>
-            {/* <div className='dropdown'>
-              <div
-                className='dropdown-btn'
-                onClick={(e) => setIsActive(!isActive)}
-              >
-                Sort by Price
-                <span className='fas fa-caret-down'></span>
-              </div>
-              {isActive && (
-                <div className='dropdown-content'>
-                  <div className='dropdown-item'>Giá thấp tới cao</div>
-                  <div className='dropdown-item'>Giá cao tới thấp</div>
-                </div>
-              )}
-            </div>
-            <div className='dropdown'>
-              <div
-                className='dropdown-btn'
-                onClick={(e) => setIsActive(!isActive)}
-              >
-                Sort by Name
-                <span className='fas fa-caret-down'></span>
-              </div>
-              {isActive && (
-                <div className='dropdown-content'>
-                  <div className='dropdown-item'>Từ A đến Z</div>
-                  <div className='dropdown-item'>Từ Z đến A</div>
-                </div>
-              )}
-            </div> */}
           </div>
           <div className='menu container'>
             <div className='row'>
