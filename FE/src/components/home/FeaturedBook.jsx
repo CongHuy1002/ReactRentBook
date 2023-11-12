@@ -79,7 +79,7 @@ const FeaturedBook = () => {
             grabCursor={true}
             centeredSlides={true}
             loop={true}
-             slidesPerView={slidesPerView}
+            slidesPerView={slidesPerView}
             coverflowEffect={{
               rotate: 0,
               stretch: 0,

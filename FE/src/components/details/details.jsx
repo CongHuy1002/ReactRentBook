@@ -30,6 +30,29 @@ import './details.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import StarRating from '../StarsRating/StarsRating';
 const Details = () => {
+  const [slidesPerView, setSlidesPerView] = useState(3);
+
+  useEffect(() => {
+    // Update slidesPerView based on screen width
+    const updateSlidesPerView = () => {
+      if (window.innerWidth <= 800) {
+        setSlidesPerView(1);
+      } else {
+        setSlidesPerView(3);
+      }
+    };
+
+    // Initially set slidesPerView
+    updateSlidesPerView();
+
+    // Add a resize event listener to adjust slidesPerView on window resize
+    window.addEventListener('resize', updateSlidesPerView);
+
+    // Remove the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('resize', updateSlidesPerView);
+    };
+  }, []);
   const { slug } = useParams(); // 'slug' is the name of the parameter you set in your route
   const [datas, setDatas] = useState([]); // Initialize with an empty array
   const [isLoading, setIsLoading] = useState(true);
@@ -91,7 +114,9 @@ const Details = () => {
       ) : (
         <div className='container mt-5'>
           <Grid templateColumns='repeat(2, 1fr)' gap={10}>
+          <div className="tt-detail">
             <GridItem>
+              <div className="img-detail">
               <div className='detail-image_container p-3'>
                 <Image
                   className='w-100'
@@ -99,8 +124,10 @@ const Details = () => {
                     'http://localhost:5000/src/public/images/' + books.images
                   }
                 />
+                </div>
               </div>
             </GridItem>
+              <div className="ttsach-detail">
             <GridItem>
               <div className='detail-image_container p-3'>
                 <Center>
@@ -140,13 +167,15 @@ const Details = () => {
                 </div>
               </div>
             </GridItem>
+            </div>
+          </div>
           </Grid>
           <div className='tab-container mt-5'>
             <Tabs isFitted>
               <TabList color='grey' align='center'>
                 <Tab _selected={{ color: 'black' }}>Mô tả</Tab>
                 <Tab _selected={{ color: 'black' }}>Đánh giá</Tab>
-                <Tab _selected={{ color: 'black' }}>Thông tin sản phẩm</Tab>
+                <Tab _selected={{ color: 'black' }}>Thông tin</Tab>
               </TabList>
               <TabIndicator
                 mt='-1.5px'
@@ -180,9 +209,10 @@ const Details = () => {
               </TabPanels>
             </Tabs>
           </div>
+        <div className="lq-detail">
           <div className='related-product_container mt-4'>
             <Heading>Sản phẩm liên quan</Heading>
-            <Swiper slidesPerView={3} spaceBetween={30}>
+            <Swiper  slidesPerView={slidesPerView} spaceBetween={30}>
               {authorBook.map((book, key) => (
                 <SwiperSlide key={key}>
                   <a href={`/details/${book.slug}`} className=''>
@@ -204,6 +234,7 @@ const Details = () => {
             {/* <div className='row'>
               <div className='col-lg-4'></div>
             </div> */}
+          </div>
           </div>
         </div>
       )}

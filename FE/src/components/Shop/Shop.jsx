@@ -47,6 +47,7 @@ const Shop = () => {
               onChange={(e) => setSortPrice(e.target.value)}
               bgColor='#fff'
               color='#000'
+              marginRight={3}
               w='md'
             >
               <option value='none' selected disabled>

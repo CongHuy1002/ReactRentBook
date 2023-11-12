@@ -52,7 +52,7 @@ const Cart = () => {
       if (res.status === 200) {
         history.push('cart/payment');
       }
-    } catch (err) {}
+    } catch (err) { }
   };
 
   const formatPrice = async (price) => {
@@ -107,14 +107,16 @@ const Cart = () => {
                         }
                         alt='Book Cover' // Added 'alt' attribute for image
                       />
-                      <h4 className='fw-bold m-0'>{item.productID.name}</h4>
-                      <span className='cart_price'>{item.productID.price}</span>
+                      <div className='namebook-cart'>
+                        <h4 className='fw-bold m-0'>{item.productID.name}</h4>
+                        <span className='cart_price'>{item.productID.price}</span>                     
                       <button
                         onClick={() => handleDeleteBtn(item.productID._id)}
                         className=''
                       >
                         <i className='cart_delete-btn fas fa-trash-can'></i>
                       </button>
+                      </div>
                     </div>
                   </>
                 ))}
