@@ -222,11 +222,11 @@ const Details = () => {
                         'http://localhost:5000/src/public/images/' + book.images
                       }
                     />
-                    <Heading size='md'>{book.name}</Heading>
-                    <p className='detail-content_cate m-0'>
+                    <div className='lq-book-name'>{book.name}</div>
+                    <div className='detail-content_cate'>
                       {books.author.name}
-                    </p>
-                    <p className='detail_content-pirce'>{book.price}</p>
+                    </div>
+                    <div className='detail_content-pirce'>${book.price}</div>
                   </a>
                 </SwiperSlide>
               ))}

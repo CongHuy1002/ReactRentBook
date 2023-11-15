@@ -73,7 +73,7 @@ const FeaturedBook = () => {
         </Center>
       ) : (
         <div className='swiper-featured-container'>
-          <h1 className='swiper-featured-title'>Featured Book</h1>
+          <h1 className='swiper-featured-title'>Sách nổi bật</h1>
           <Swiper
             effect={'coverflow'}
             grabCursor={true}
@@ -105,8 +105,8 @@ const FeaturedBook = () => {
                     alt='imgbook'
                   />
                   <h1> {book.name} </h1>
-                  <p></p>
-                  <p className='price'> <b>${book.price} </b>  </p>
+                  <div className='author-name-ft'>{book.author.name}</div>
+                  <div className='price-ft'> <b>${book.price} </b>  </div>
                 </div>
               </SwiperSlide>
             ))}
