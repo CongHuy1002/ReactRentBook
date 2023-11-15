@@ -1,22 +1,22 @@
 export const nav = [
     {
-      text: "home",
+      text: "Trang chủ",
       path: "/",
     },
     {
-      text: "shop",
+      text: "Xem sách",
       path: "/shop",
     },
     {
-      text: "sign in",
+      text: "Đăng nhập",
       path: "/signin",
     },
     {
-      text: "sign up",
+      text: "Đăng ký",
       path: "/signup",
     },
     {
-      text: "contact",
+      text: "Liên hệ",
       path: "/contact",
     },
   ]

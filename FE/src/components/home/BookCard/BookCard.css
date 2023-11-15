@@ -3,8 +3,19 @@
   font-size: 16px;
   font-weight: 700;
 }
-.price {
+.book-price {
   color: #f05b4d;
-  font-size: 36px;
+  font-size: 16px;
   font-weight: 700;
+}
+.book-name{
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 700;
+}
+.book-img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  padding: 8px;
 }

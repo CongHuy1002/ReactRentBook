@@ -28,7 +28,7 @@ export function CustomerCard() {
   return (
     <>
       <div className='container mt-5 mb-5'>
-        <h1 className='mb-3'>What Client Says</h1>
+        <h1 className='mb-3'>Đánh giá của đọc giả</h1>
         <div className='customer-card_container'>
           <div className='row'>
             {customerInfo.map((customer) => (
