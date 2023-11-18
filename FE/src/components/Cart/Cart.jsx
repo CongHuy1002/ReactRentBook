@@ -126,20 +126,20 @@ const Cart = () => {
                   ))
                 )}
               </div>
-              <div className='col-lg-4'>
-                <div className='summary'>
-                  <h1 className='text-center'>Summary</h1>
+              <div className='col-lg-4 product-content-left-small-img'>
+                <div className='div2'>
+                  <h1 className='text-center'>Giỏ hàng</h1>
                   <form onSubmit={handleSubmit}>
-                    <div className='d-flex align-items-center justify-content-between'>
-                      <p className='m-0'>Quantity</p>
-                      <span>{cartItems.length}</span>
+                    <div className='d-flex align-items-center justify-content-between product-content-left-big-img'>
+                      <p className='m-0'>Số ngày</p>
+                      <span>{datas.cartItemCount}</span>
                     </div>
-                    <div className='d-flex align-items-center justify-content-between'>
-                      <p className='m-0'>Total</p>
-                      <span className='cart_price'>{totalPrice}</span>
+                    <div className='d-flex align-items-center justify-content-between product-content-left-big-img'>
+                      <p className='m-0'>Tổng</p>
+                      <span className='cart_price'>{datas.totalPrice}</span>
                     </div>
                     <div className='form-group fw-bold d-flex justify-content-between mt-1'>
-                      <label htmlFor='date'>Select day rent</label>
+                      <label htmlFor='date'>Chọn ngày thuê</label>
                       <div className='controls border'>
                         <input
                           className='datePicker'
@@ -151,8 +151,8 @@ const Cart = () => {
                         />
                       </div>
                     </div>
-                    <button type='submit' className='text-white cart_order-btn'>
-                      Order Now!
+                    <button type='submit' className='cart_order-btn text-white'>
+                      Thuê ngay!
                     </button>
                   </form>
                 </div>

@@ -77,7 +77,7 @@ const FeaturedBook = () => {
         </Center>
       ) : (
         <div className='swiper-featured-container'>
-          <h1 className='swiper-featured-title'>Featured Book</h1>
+          <h1 className='swiper-featured-title'>Sách nổi bật</h1>
           <Swiper
             effect={'coverflow'}
             grabCursor={true}

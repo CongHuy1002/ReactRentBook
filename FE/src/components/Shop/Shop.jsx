@@ -39,7 +39,7 @@ const Shop = () => {
       ) : (
         <div className=''>
           <div className='shop-header d-flex align-items-center mb-5'>
-            <h1 className='ml-5 fw-bold shop-header_text'>Shop</h1>
+            <h1 className='ml-5 fw-bold shop-header_text'>Xem sách</h1>
           </div>
           <div className='sort'>
             <Select
@@ -50,10 +50,10 @@ const Shop = () => {
               w='md'
             >
               <option value='none' selected disabled>
-                Sort by price
+                Tìm theo giá
               </option>
-              <option value='desc'>From Highest to Lowest</option>
-              <option value='asc'>From Lowest to Highest</option>
+              <option value='desc'>Giá cao tới thấp</option>
+              <option value='asc'>Giá thấp tới cao</option>
             </Select>
             <Select
               onChange={(e) => setSortName(e.target.value)}
@@ -62,10 +62,10 @@ const Shop = () => {
               w='md'
             >
               <option value='none' selected disabled>
-                Sort by name
+                Tìm theo tên
               </option>
-              <option value='asc'>From A to Z</option>
-              <option value='desc'>From Z to A</option>
+              <option value='asc'>Từ A tới Z</option>
+              <option value='desc'>Từ Z tới A</option>
             </Select>
           </div>
           <div className='menu container'>

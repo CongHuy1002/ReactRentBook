@@ -50,14 +50,14 @@ const Signin = () => {
     <div className='login template d-flex justify-content-center align-items-center 100-vh p-5'>
       <div className='form_container p-5 rounded '>
         <form onSubmit={handleSubmit}>
-          <h3 className='text-center'>Sign in</h3>
+          <h3 className='text-center'>Đăng nhập</h3>
           <div className='mb-2'>
             <label htmlFor='username'>
-              <b>Username</b>
+              <b>Tài khoản</b>
             </label>
             <input
               type='text'
-              placeholder='Enter your username'
+              placeholder='Nhập tài khoản'
               className='form-control'
               value={username}
               onChange={(e) => Setusername(e.target.value)}
@@ -65,11 +65,11 @@ const Signin = () => {
           </div>
           <div className='mb-2'>
             <label htmlFor='password'>
-              <b>Password</b>
+              <b>Mật khẩu</b>
             </label>
             <input
               type='password'
-              placeholder='Enter your password'
+              placeholder='Nhập mật khẩu'
               className='form-control'
               value={password}
               onChange={(e) => Setpassword(e.target.value)}
@@ -79,9 +79,9 @@ const Signin = () => {
             Sign in
           </button>
           <p className='text-end mt-2'>
-            <Link to='/forgotpassword'>Forgot Password?</Link>{' '}
+            <Link to='/forgotpassword'>Quên mật khẩu?</Link>{' '}
             <Link to='/signup' className='ms-2'>
-              Sign up
+              Đăng ký
             </Link>
           </p>
         </form>

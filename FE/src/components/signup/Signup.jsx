@@ -46,14 +46,14 @@ const Signup = () => {
     <div className='login template d-flex justify-content-center align-items-center 100-vh p-5'>
       <div className='form_container p-5 rounded '>
         <form onSubmit={handleSubmit}>
-          <h3 className='text-center'>Sign up</h3>
+          <h3 className='text-center'>Đăng ký</h3>
           <div className='mb-2'>
             <label htmlFor='username'>
-              <b>Username</b>
+              <b>Tài khoản</b>
             </label>
             <input
               type='text'
-              placeholder='Enter your username'
+              placeholder='Nhập tài khoản'
               className='form-control'
               value={username}
               onChange={(e) => Setusername(e.target.value)}
@@ -61,11 +61,11 @@ const Signup = () => {
           </div>
           <div className='mb-2'>
             <label htmlFor='password'>
-              <b>Password</b>
+              <b>Mật khẩu</b>
             </label>
             <input
               type='password'
-              placeholder='Enter your password'
+              placeholder='Nhập mật khẩu'
               className='form-control'
               value={password}
               onChange={(e) => Setpassword(e.target.value)}
@@ -79,12 +79,12 @@ const Signup = () => {
               value={email}
               onChange={(e) => SetEmail(e.target.value)}
               type='email'
-              placeholder='Enter your Email'
+              placeholder='Nhập email'
               className='form-control'
             />
           </div>
           <button className='btn btn-signup h-100 text-white text-center w-100'>
-            Sign up
+            Đăng ký
           </button>
         </form>
       </div>

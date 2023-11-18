@@ -38,7 +38,7 @@ export function Search() {
           <Input
             mb='24px'
             onChange={(e) => setQuery(e.target.value)}
-            placeholder='Find your books'
+            placeholder='Tìm sách của bạn'
             _placeholder={{ opacity: 0.4, color: 'inherit' }}
           />
           <Grid

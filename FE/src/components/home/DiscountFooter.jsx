@@ -8,13 +8,13 @@ const DiscountFooter = () => {
                 <div className='container-df'>
                     <div className='container-sale'>
                         <div className='text'>
-                            <h1>THE BEST OF 2023</h1>
+                            <h1>Đọc nhiều nhất 2023</h1>
                             <div className='sale'>
                                 <div>
-                                    UP TO 30% OFF
+                                    Giảm ngay 30%
                                 </div>
                                 <div>
-                                    TOP READS
+                                    Trải nghiệm ngay
                                 </div>
                             </div>
                         </div>

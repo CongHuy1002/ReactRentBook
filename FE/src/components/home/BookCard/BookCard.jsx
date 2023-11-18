@@ -1,5 +1,7 @@
+import React from 'react';
 import '../../styles/Book.css';
 import './BookCard.css';
+
 export function BookCard({ book }) {
   const formatPriceVND = (price) => {
     return new Intl.NumberFormat('vi-VN', {

@@ -14,7 +14,7 @@ const breakPoints = [
 const GenresBook = () => {
   return (
     <>
-      <h1 style={{ textAlign: 'left', marginLeft: 50 }}>Genres Book</h1>
+      <h1 style={{ textAlign: 'left', marginLeft: 50 }}>Thể loại sách</h1>
       <div className='GenresBook mb-4'>
         <Carousel
           breakPoints={breakPoints}

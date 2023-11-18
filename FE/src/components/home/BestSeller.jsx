@@ -7,7 +7,7 @@ import '../styles/Book.css';
 import axios from 'axios';
 
 const BestSeller = () => {
-  const [datas, setDatas] = useState([]); // Initialize with an empty array
+  const [datas, setDatas] = useState([]); 
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -38,12 +38,12 @@ const BestSeller = () => {
           <Spinner />
         </Center>
       ) : (
-        <div className='menu container'>
-          <h1 className='menuTitle'>Best Sellers</h1>
-          <div className='row'>
+        <div className='menu'>
+          <h1 className='menuTitle'>Sách Yêu Thích</h1>
+          <div className='menuList'>
             {books.map((book) => (
               <>
-                <div className='col-lg-4'>
+                <div className=''>
                   <BookCard book={book}></BookCard>
                 </div>
               </>
