@@ -7,15 +7,32 @@ header {
   z-index: 99999;
   font-family: Arial, Helvetica, sans-serif;
 }
-
+header a:hover {
+  color: #f4402f;
+}
 header img {
   width: 140px;
   height: 55px;
   margin-bottom: 10px;
 }
 
-header a:hover {
-  color: #f4402f;
+.search-btn {
+  margin-top: 3px;
+}
+
+.cart-btn {
+  margin-top: 3px;
+}
+
+header a {
+  margin-left: 30px;
+  transition: 0.5s;
+  font-weight: 500;
+}
+
+.nav li {
+  margin-top: 15px;
+  font-size: 16px;
 }
 
 header span {
@@ -50,10 +67,16 @@ header .toggle {
     justify-content: center;
     align-items: center;
     display: flex;
+    margin-top: 20px;
   }
 
   header .nav .flex {
     display: none;
+  }
+
+  header a:hover {
+    color: whitesmoke;
+    font-weight: bold;
   }
 
   header .toggle {
@@ -75,4 +98,13 @@ header .toggle {
     margin-bottom: 20px;
     color: #fff;
   }
+  .search-btn {
+    margin-top: 3px;
+  }
+  .cart-btn {
+    margin-top: 3px;
+  }
+}
+.signup-btn {
+  background-color: #f4402f !important;
 }

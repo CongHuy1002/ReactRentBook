@@ -2,6 +2,8 @@
   border-radius: 30px;
   border: 1px solid #a7a7a7;
   padding: 32px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 .cart_img {
   width: 200px;
@@ -27,4 +29,11 @@
   padding: 12px;
   height: 100%;
   margin-top: 30px;
+}
+
+@media screen and (max-width: 768px) {
+  .namebook-cart{
+    display: table-row;
+    margin-right: 10px;
+  }
 }

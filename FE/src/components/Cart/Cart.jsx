@@ -97,8 +97,8 @@ const Cart = () => {
                     />
                     <h2 className='text-body'>Your cart is empty</h2>
                     <p className='text-secondary'>
-                      Look likes you have not added any book to your cart.
-                      Return to shop and explore our books
+                      Looks like you have not added any book to your cart.
+                      Return to shop and explore our books.
                     </p>
                   </div>
                 ) : (

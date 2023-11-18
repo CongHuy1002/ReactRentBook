@@ -1,31 +1,73 @@
-import React from 'react'
-import './signupemail.css'
-import {Link} from 'react-router-dom'
-
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import './signupemail.css';
+import { useToast } from '@chakra-ui/react';
 const SignupEmail = () => {
+  const [email, Setemail] = useState('');
+  const toast = useToast();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(
+        'http://localhost:5000/user/forgot-password',
+        {
+          gmail: email,
+        },
+        {
+          withCredentials: true,
+        },
+      );
+      if (res.status === 200) {
+        toast({
+          title: 'Email Dispatched Successfully',
+          description: 'We just sent your an email, please have a look',
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+        });
+      }
+    } catch (error) {
+      toast({
+        title: 'Can not find user',
+        description:
+          'We cant find your account in our system. Please try again',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  };
   return (
-    <div className='signup template d-flex justify-content-center align-items-center 100-vh bg-primary p-5'>
-    <div className='form_container p-5 rounded bg-white'>
-    <form>
-      <h3 className='text-center'>Sign Up Email</h3>
-      <div className='mb-2'>
-          <label htmlFor='email'>Email</label>
-          <input type='email' placeholder='Nhập email của bạn' className='form-control'/>
+    <div className='login template d-flex justify-content-center align-items-center 100-vh p-5'>
+      <div className='form_container p-5 rounded '>
+        <form onSubmit={handleSubmit}>
+          <h3 className='text-center'>Forgot Password</h3>
+          <div className='mb-2'>
+            <label htmlFor='username'>
+              <b>Email</b>
+            </label>
+            <input
+              type='text'
+              placeholder='Enter your email'
+              className='form-control'
+              value={email}
+              onChange={(e) => Setemail(e.target.value)}
+            />
+          </div>
+          <button className='btn btn-login h-100 text-white text-center w-100'>
+            Submit
+          </button>
+          {/* <p className='text-end mt-2'>
+            <Link to='/forgotpassword'>Forgot Password?</Link>{' '}
+            <Link to='/signup' className='ms-2'>
+              Sign up
+            </Link>
+          </p> */}
+        </form>
       </div>
-      <div className='mb-2'>
-        <input type="checkbox" className='custom-control custom-checkbox' id='check'/>
-        <label htmlFor='check' className='custom-input-label ms-2'>Remember me</label>
-      </div>
-      <div className='d-grid'>
-          <button className='btn btn-primary'>Sign Up</button>
-      </div>
-      <p className='text-end mt-2'>
-        Already Register? <Link to="/signin" className='ms-2'>Sign in</Link> 
-      </p>
-      </form>
-      </div>
-  </div>
-  )
-}
+    </div>
+  );
+};
 
-export default SignupEmail
+export default SignupEmail;

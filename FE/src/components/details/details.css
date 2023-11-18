@@ -25,3 +25,31 @@
   border-right: 1px solid;
   padding: 4px;
 }
+
+.tt-detail{
+  display: flex;
+  width: max-content;
+  margin-left: 80px;
+  height: 800px;
+}
+
+.img-detail{
+  margin-right: 30px;
+}
+
+@media screen and (max-width: 768px) {
+  .tt-detail{
+   display: block;
+   padding: 16px;
+   margin-left: 10px;
+   width: 400px;
+   height: 500px;
+   margin-bottom: 530px;
+  }
+  .img-detail{
+    margin-bottom: 10px;
+  }
+  .ttsach-detail{
+    margin-right: 30px;
+  }
+}

@@ -15,6 +15,7 @@ let refreshTokenArray = [];
 class userController {
   async registerUsers(req, res, next) {
     try {
+      console.log(req.body.gmail);
       const salt = await bcrypt.genSalt(10);
       const hash = await bcrypt.hash(req.body.password, salt);
       //* Create new user
@@ -25,8 +26,9 @@ class userController {
       });
       //* Save to database
       const user = await newUser.save();
-      res.redirect('/loginform');
+      return res.status(200);
     } catch (err) {
+      console.log(err);
       res.status(500).json(err);
     }
   }
@@ -120,12 +122,21 @@ class userController {
             expiresIn: '5m',
           },
         );
-        const link = process.env.linkResetPasswordAPI + `${user._id}/${token}`;
+        const link = process.env.linkResetPasswordAPI + `/${user._id}/${token}`;
+        console.log(link);
         transporter.sendMail({
           to: gmailInput, //! gmailInput
           from: 'bestquangminh@gmail.com',
           subject: 'Link To Reset Password',
-          text: link,
+          html: `
+    <div style="font-family: Arial, sans-serif; color: #333;">
+      <h1 style="color: #5a5a5a;">Password Reset Request</h1>
+      <p>Hi there,</p>
+      <p>You requested a password reset. Please click on the link below to set a new password:</p>
+      <a href="${link}" style="background-color: #f05b4d; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; margin-top: 10px;">Reset Password</a>
+      <p>If you did not request a password reset, please ignore this email.</p>
+    </div>
+  `,
         });
         return res.status(200).json('success');
       })
@@ -142,11 +153,14 @@ class userController {
       const secret = process.env.JWT_ACCESS_TOKEN + user.password;
       try {
         const verify = jwt.verify(token, secret);
-        res.render('change-password', {
-          gmail: user.gmail,
-          id: user.id,
-          token: req.params.token,
-        });
+        // res.render('change-password', {
+        //   gmail: user.gmail,
+        //   id: user.id,
+        //   token: req.params.token,
+        // });6
+        res
+          .status(200)
+          .json({ gmail: user.gmail, id: user.id, token: req.params.token });
       } catch (err) {
         res.send('not verified');
       }

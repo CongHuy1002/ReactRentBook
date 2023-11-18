@@ -3,7 +3,7 @@ import { Container, Grid, GridItem, Input, Spinner } from '@chakra-ui/react';
 import { useDebounce } from 'use-debounce';
 import axios from 'axios';
 import { BookCard } from '../home/BookCard/BookCard';
-import './search.css'
+import './search.css';
 export function Search() {
   const [searchedBooks, setSearchedBooks] = useState([]);
   const [query, setQuery] = useState('');
@@ -30,10 +30,10 @@ export function Search() {
   }, [debouncedValue]);
   return (
     <>
-      <div className="search">
+      <div className='search'>
         <Container maxW='1440px' pt='125px'>
-          <div className="title">
-            <h2>Tìm Kiếm Sách</h2>
+          <div className='title'>
+            <h2>Find your favorite books</h2>
           </div>
           <Input
             mb='24px'

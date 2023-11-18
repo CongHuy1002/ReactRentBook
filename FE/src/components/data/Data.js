@@ -1,22 +1,22 @@
 export const nav = [
-    {
-      text: "home",
-      path: "/",
-    },
-    {
-      text: "shop",
-      path: "/shop",
-    },
-    {
-      text: "vendor",
-      path: "/vendor",
-    },
-    {
-      text: "blog",
-      path: "/blog",
-    },
-    {
-      text: "contact",
-      path: "/contact",
-    },
-  ]
+  {
+    text: 'home',
+    path: '/',
+  },
+  {
+    text: 'shop',
+    path: '/shop',
+  },
+  // {
+  //   text: 'sign in',
+  //   path: '/signin',
+  // },
+  // {
+  //   text: 'sign up',
+  //   path: '/signup',
+  // },
+  {
+    text: 'contact',
+    path: '/contact',
+  },
+];
