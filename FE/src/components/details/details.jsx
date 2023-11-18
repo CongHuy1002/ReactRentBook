@@ -122,65 +122,68 @@ const Details = () => {
       ) : (
         <div className='container mt-5'>
           <Grid templateColumns='repeat(2, 1fr)' gap={10}>
-          <div className="tt-detail">
-            <GridItem>
-              <div className="img-detail">
-              <div className='detail-image_container p-3'>
-                <Image
-                  className='w-100'
-                  src={
-                    'http://localhost:5000/src/public/images/' + books.images
-                  }
-                />
-                </div>
-              </div>
-            </GridItem>
-              <div className="ttsach-detail">
-            <GridItem>
-              <div className='detail-image_container p-3'>
-                <Center>
-                  <Heading p={10}>{books.name}</Heading>
-                </Center>
-                <div className='detail_content d-flex align-items-center'>
-                  <div className='d-flex align-items-center author-container'>
-                    <p className='m-0 text-secondary-emphasis'>Tác giả:</p>{' '}
-                    <p className='m-0 fw-bold'>{books.author.name}</p>
-                  </div>
-                  <StarRating
-                    onSetRating={setUserRating}
-                    maxRating={5}
-                    size={34}
-                  ></StarRating>
-                </div>
-                <Divider />
-                <div className='p-3 mb-5'>
-                  <h1 className='detail_content-pirce'>
-                    {books && books.price ? formatPriceVND(books.price) : ''}
-                  </h1>
-                  <div className='d-flex align-items-center gap-3'>
-                    <div
-                      class='btn w-100 detail-content_btn btn-outline-danger'
-                      onClick={() => addToCartSubmit(books._id)}
-                    >
-                      <i class='fa-solid fa-cart-shopping'></i>
-                      Thêm vào giỏ hàng
-                    </div>
-                    <div class='btn w-100 detail-content_btn btn-danger fw-bold'>
-                      Thuê ngay
-                    </div>
+            <div className='tt-detail'>
+              <GridItem>
+                <div className='img-detail'>
+                  <div className='detail-image_container p-3'>
+                    <Image
+                      className='w-100'
+                      src={
+                        'http://localhost:5000/src/public/images/' +
+                        books.images
+                      }
+                    />
                   </div>
                 </div>
-                <Divider />
-                <div className='d-flex align-items-center'>
-                  <p className='detail-content_cate m-0 p-2'>Thể loại:</p>
-                  <p className=' text-black fw-bold m-0 p-2'>
-                    {genres == undefined ? <Spinner /> : genres.name}
-                  </p>
-                </div>
+              </GridItem>
+              <div className='ttsach-detail'>
+                <GridItem>
+                  <div className='detail-image_container p-3'>
+                    <Center>
+                      <Heading p={10}>{books.name}</Heading>
+                    </Center>
+                    <div className='detail_content d-flex align-items-center'>
+                      <div className='d-flex align-items-center author-container'>
+                        <p className='m-0 text-secondary-emphasis'>Tác giả:</p>{' '}
+                        <p className='m-0 fw-bold'>{books.author.name}</p>
+                      </div>
+                      <StarRating
+                        onSetRating={setUserRating}
+                        maxRating={5}
+                        size={34}
+                      ></StarRating>
+                    </div>
+                    <Divider />
+                    <div className='p-3 mb-5'>
+                      <h1 className='detail_content-pirce'>
+                        {books && books.price
+                          ? formatPriceVND(books.price)
+                          : ''}
+                      </h1>
+                      <div className='d-flex align-items-center gap-3'>
+                        <div
+                          class='btn w-100 detail-content_btn btn-outline-danger'
+                          onClick={() => addToCartSubmit(books._id)}
+                        >
+                          <i class='fa-solid fa-cart-shopping'></i>
+                          Thêm vào giỏ hàng
+                        </div>
+                        <div class='btn w-100 detail-content_btn btn-danger fw-bold'>
+                          Thuê ngay
+                        </div>
+                      </div>
+                    </div>
+                    <Divider />
+                    <div className='d-flex align-items-center'>
+                      <p className='detail-content_cate m-0 p-2'>Thể loại:</p>
+                      <p className=' text-black fw-bold m-0 p-2'>
+                        {genres == undefined ? <Spinner /> : genres.name}
+                      </p>
+                    </div>
+                  </div>
+                </GridItem>
               </div>
-            </GridItem>
             </div>
-          </div>
           </Grid>
           <div className='tab-container mt-5'>
             <Tabs isFitted>
@@ -221,34 +224,33 @@ const Details = () => {
               </TabPanels>
             </Tabs>
           </div>
-        <div className="lq-detail">
-          <div className='related-product_container mt-4'>
-            <Heading>Sản phẩm liên quan</Heading>
-            <Swiper  slidesPerView={slidesPerView} spaceBetween={30}>
-              {authorBook.map((book, key) => (
-                <SwiperSlide key={key}>
-                  <a href={`/details/${book.slug}`} className=''>
-                    <Image
-                      borderRadius={30}
-                      src={
-                        'http://localhost:5000/src/public/images/' + book.images
-                      }
-                    />
-                    <div className='lq-book-name'>{book.name}</div>
-                    <div className='detail-content_cate'>
-                      {books.author.name}
-                    </p>
-                    <p className='detail_content-pirce'>
-                      {book.price ? formatPriceVND(book.price) : ''}
-                    </p>
-                  </a>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            {/* <div className='row'>
+          <div className='lq-detail'>
+            <div className='related-product_container mt-4'>
+              <Heading>Sản phẩm liên quan</Heading>
+              <Swiper slidesPerView={slidesPerView} spaceBetween={30}>
+                {authorBook.map((book, key) => (
+                  <SwiperSlide key={key}>
+                    <a href={`/details/${book.slug}`} className=''>
+                      <Image
+                        borderRadius={30}
+                        src={
+                          'http://localhost:5000/src/public/images/' +
+                          book.images
+                        }
+                      />
+                      <div className='lq-book-name'>{book.name}</div>
+                      <div className='detail-content_cate'>
+                        {books.author.name}
+                      </div>
+                      <div className='detail_content-pirce'>${book.price}</div>
+                    </a>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+              {/* <div className='row'>
               <div className='col-lg-4'></div>
             </div> */}
-          </div>
+            </div>
           </div>
         </div>
       )}
