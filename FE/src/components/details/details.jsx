@@ -237,7 +237,7 @@ const Details = () => {
                     <div className='lq-book-name'>{book.name}</div>
                     <div className='detail-content_cate'>
                       {books.author.name}
-                    </p>
+                    </div>
                     <p className='detail_content-pirce'>
                       {book.price ? formatPriceVND(book.price) : ''}
                     </p>
