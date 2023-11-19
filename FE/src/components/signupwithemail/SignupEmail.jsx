@@ -42,21 +42,21 @@ const SignupEmail = () => {
     <div className='login template d-flex justify-content-center align-items-center 100-vh p-5'>
       <div className='form_container p-5 rounded '>
         <form onSubmit={handleSubmit}>
-          <h3 className='text-center'>Forgot Password</h3>
+          <h3 className='text-center'>Quên mật khẩu</h3>
           <div className='mb-2'>
             <label htmlFor='username'>
               <b>Email</b>
             </label>
             <input
               type='text'
-              placeholder='Enter your email'
+              placeholder='Nhập email'
               className='form-control'
               value={email}
               onChange={(e) => Setemail(e.target.value)}
             />
           </div>
           <button className='btn btn-login h-100 text-white text-center w-100'>
-            Submit
+            Gửi
           </button>
           {/* <p className='text-end mt-2'>
             <Link to='/forgotpassword'>Forgot Password?</Link>{' '}

@@ -3,26 +3,18 @@ import '../../styles/Book.css';
 import './BookCard.css';
 
 export function BookCard({ book }) {
-  const formatPriceVND = (price) => {
-    return new Intl.NumberFormat('vi-VN', {
-      style: 'currency',
-      currency: 'VND',
-    }).format(price);
-  };
+  const imageUrl = `http://localhost:5000/src/public/images/${book.images}`;
+
   return (
-    <a href={`/details/${book.slug}`} className='bookItem mb-4 d-flex'>
-      <img
-        style={{ borderRadius: 30 }}
-        className=''
-        src={'http://localhost:5000/src/public/images/' + book.images}
-        alt='imgbook'
-      />
-      <div className='p-3'>
-        <h3> {book.name} </h3>
-        <p className='author-name'>{book.author.name}</p>
-        <p className='price'>
-          {book && book.price ? formatPriceVND(book.price) : ''}{' '}
-        </p>
+    <a href={`/details/${book.slug}`} className='bookItem'>
+      <div className='menuItem'>
+        <div
+          className='book-img'
+          style={{ backgroundImage: `url(${imageUrl})` }}
+        ></div>
+        <div className='book-name'>{book.name}</div>
+        <div className='author-name'>{book.author.name}</div>
+        <div className='book-price'> ${book.price} </div>
       </div>
     </a>
   );

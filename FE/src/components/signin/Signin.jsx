@@ -76,7 +76,7 @@ const Signin = () => {
             />
           </div>
           <button className='btn btn-login h-100 text-white text-center w-100'>
-            Sign in
+            Đăng nhập
           </button>
           <p className='text-end mt-2'>
             <Link to='/forgotpassword'>Quên mật khẩu?</Link>{' '}
