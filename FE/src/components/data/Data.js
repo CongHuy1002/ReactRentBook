@@ -8,14 +8,6 @@ export const nav = [
     path: '/shop',
   },
   {
-    text: 'Đăng nhập',
-    path: '/signin',
-  },
-  {
-    text: 'Đăng ký',
-    path: '/signup',
-  },
-  {
     text: 'Liên hệ',
     path: '/contact',
   },
