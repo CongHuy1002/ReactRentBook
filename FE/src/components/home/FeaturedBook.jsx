@@ -109,13 +109,13 @@ const FeaturedBook = () => {
                     alt='imgbook'
                   />
                   <h1> {book.name} </h1>
-                  <p></p>
-                  <p className='price'>
+                  <div className='author-ft'>{book.author.name}</div>
+                  <div className='price-ft'>
                     {' '}
                     <b>
                       {book && book.price ? formatPriceVND(book.price) : ''}{' '}
                     </b>
-                  </p>
+                  </div>
                 </div>
               </SwiperSlide>
             ))}

@@ -95,23 +95,24 @@ const Cart = () => {
                       w='70%'
                       src='https://assets.materialup.com/uploads/16e7d0ed-140b-4f86-9b7e-d9d1c04edb2b/preview.png'
                     />
-                    <h2 className='text-body'>Your cart is empty</h2>
+                    <h2 className='text-body'>Giỏ hàng đang rỗng</h2>
                     <p className='text-secondary'>
-                      Looks like you have not added any book to your cart.
-                      Return to shop and explore our books.
+                      Không tìm thấy sách nào trong giỏ hàng của bạn
+                      Quay lại và thêm vào giỏ hàng nhé.
                     </p>
                   </div>
                 ) : (
                   cartItems.map((item) => (
                     <div
                       key={item.productID._id}
-                      className='d-flex align-items-center gap-5 mb-5'
+                      className='d-flex align-items-center gap-6 mb-5'
                     >
                       <img
                         className='cart_img'
                         src={`http://localhost:5000/src/public/images/${item.productID.images}`}
                         alt='Product'
                       />
+                      <div className='thongtin-sachthue d-flex flex-column'>
                       <h4 className='fw-bold m-0'>{item.productID.name}</h4>
                       <span className='cart_price'>
                         {formatPrice(item.productID.price)}
@@ -122,6 +123,7 @@ const Cart = () => {
                       >
                         <i className='fas fa-trash-can'></i>
                       </button>
+                      </div>
                     </div>
                   ))
                 )}

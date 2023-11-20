@@ -30,17 +30,22 @@ const Shop = () => {
     };
 
     fetchData();
-  }, [sortName, sortPrice]); // Empty dependency array for one-time execution
+  }, [sortName, sortPrice]); 
   const books = datas.books;
   return (
     <>
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className=''>
-          <div className='shop-header d-flex align-items-center mb-5'>
-            <h1 className='ml-5 fw-bold shop-header_text'>Xem sách</h1>
+        <>
+        <div className='shop-title'>
+            <div className='xem-sach'>Thuê sách nhanh chỉ với 1 chạm
+            </div>
+            <div>
+              Nơi thuê sách rẻ uy tính nhất Việt Nam
+            </div>
           </div>
+        <div className='shop'>
           <div className='sort'>
             <Select
               onChange={(e) => setSortPrice(e.target.value)}
@@ -80,6 +85,7 @@ const Shop = () => {
             </div>
           </div>
         </div>
+        </>
       )}
     </>
   );
