@@ -26,8 +26,8 @@ const Signin = () => {
         localStorage.setItem('accessToken', res.data.accessToken);
         localStorage.setItem('userName', res.data.username);
         toast({
-          title: 'Login successfully',
-          description: 'You have logged in successfully.',
+          title: 'Đăng nhập thành công',
+          description: 'Bạn đã đăng nhập thành công',
           status: 'success',
           duration: 9000,
           isClosable: true,
@@ -38,8 +38,8 @@ const Signin = () => {
       }
     } catch (error) {
       toast({
-        title: 'Wrong password',
-        description: 'Your password is incorrect',
+        title: 'Tài khoàn và mật khẩu có thể sai',
+        description: 'Xin hãy kiểm tra lại',
         status: 'error',
         duration: 5000,
         isClosable: true,

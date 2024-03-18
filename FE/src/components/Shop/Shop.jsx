@@ -30,7 +30,7 @@ const Shop = () => {
     };
 
     fetchData();
-  }, [sortName, sortPrice]); 
+  }, [sortName, sortPrice]);
   const books = datas.books;
   return (
     <>
@@ -38,53 +38,50 @@ const Shop = () => {
         <Spinner />
       ) : (
         <>
-        <div className='shop-title'>
-            <div className='xem-sach'>Thuê sách nhanh chỉ với 1 chạm
-            </div>
-            <div>
-              Nơi thuê sách rẻ uy tính nhất Việt Nam
-            </div>
+          <div className='shop-title'>
+            <div className='xem-sach'>Thuê sách nhanh chỉ với 1 chạm</div>
+            <div>Nơi thuê sách rẻ uy tính nhất Việt Nam</div>
           </div>
-        <div className='shop'>
-          <div className='sort'>
-            <Select
-              onChange={(e) => setSortPrice(e.target.value)}
-              bgColor='#fff'
-              color='#000'
-              marginRight={3}
-              w='md'
-            >
-              <option value='none' selected disabled>
-                Tìm theo giá
-              </option>
-              <option value='desc'>Giá cao tới thấp</option>
-              <option value='asc'>Giá thấp tới cao</option>
-            </Select>
-            <Select
-              onChange={(e) => setSortName(e.target.value)}
-              bgColor='#fff'
-              color='#000'
-              w='md'
-            >
-              <option value='none' selected disabled>
-                Tìm theo tên
-              </option>
-              <option value='asc'>Từ A tới Z</option>
-              <option value='desc'>Từ Z tới A</option>
-            </Select>
-          </div>
-          <div className='menu container'>
-            <div className='row'>
-              {books.map((book) => (
-                <>
-                  <div className='col-lg-4'>
-                    <BookCard book={book}></BookCard>
-                  </div>
-                </>
-              ))}
+          <div className='shop'>
+            <div className='sort'>
+              <Select
+                onChange={(e) => setSortPrice(e.target.value)}
+                bgColor='#fff'
+                color='#000'
+                marginRight={3}
+                w='md'
+              >
+                <option value='none' selected disabled>
+                  Tìm theo giá
+                </option>
+                <option value='desc'>Giá cao tới thấp</option>
+                <option value='asc'>Giá thấp tới cao</option>
+              </Select>
+              <Select
+                onChange={(e) => setSortName(e.target.value)}
+                bgColor='#fff'
+                color='#000'
+                w='md'
+              >
+                <option value='none' selected disabled>
+                  Tìm theo tên
+                </option>
+                <option value='asc'>Từ A tới Z</option>
+                <option value='desc'>Từ Z tới A</option>
+              </Select>
+            </div>
+            <div className='menu container'>
+              <div className='row'>
+                {books.map((book) => (
+                  <>
+                    <div className='col-lg-4 col-md-6 col-sm-12'>
+                      <BookCard book={book}></BookCard>
+                    </div>
+                  </>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
         </>
       )}
     </>

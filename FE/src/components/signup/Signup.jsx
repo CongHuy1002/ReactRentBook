@@ -86,6 +86,12 @@ const Signup = () => {
           <button className='btn btn-signup h-100 text-white text-center w-100'>
             Đăng ký
           </button>
+          <p className='text-end mt-2'>
+            <Link to='/forgotpassword'>Quên mật khẩu?</Link>{' '}
+            <Link to='/signin' className='ms-2'>
+              Đăng nhập
+            </Link>
+          </p>
         </form>
       </div>
     </div>

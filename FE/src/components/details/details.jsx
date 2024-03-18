@@ -168,7 +168,7 @@ const Details = () => {
                           <i class='fa-solid fa-cart-shopping'></i>
                           Thêm vào giỏ hàng
                         </div>
-                        <div class='btn w-100 detail-content_btn btn-danger fw-bold'>
+                        <div class='btn w-100 detail-content_btn d-flex justify-content-center align-items-center btn-danger fw-bold'>
                           Thuê ngay
                         </div>
                       </div>
@@ -224,31 +224,32 @@ const Details = () => {
               </TabPanels>
             </Tabs>
           </div>
-        <div className="lq-detail">
-          <div className='related-product_container mt-4'>
-            <Heading>Sản phẩm liên quan</Heading>
-            <Swiper  slidesPerView={slidesPerView} spaceBetween={30}>
-              {authorBook.map((book, key) => (
-                <SwiperSlide key={key}>
-                  <a href={`/details/${book.slug}`} className=''>
-                    <Image
-                      borderRadius={30}
-                      src={
-                        'http://localhost:5000/src/public/images/' + book.images
-                      }
-                    />
-                    <div className='lq-book-name'>{book.name}</div>
-                    <div className='detail-content_cate'>
-                      {books.author.name}
-                    </div>
-                    <p className='detail_content-pirce'>
-                      {book.price ? formatPriceVND(book.price) : ''}
-                    </p>
-                  </a>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            {/* <div className='row'>
+          <div className='lq-detail'>
+            <div className='related-product_container mt-4'>
+              <Heading>Sản phẩm liên quan</Heading>
+              <Swiper slidesPerView={slidesPerView} spaceBetween={30}>
+                {authorBook.map((book, key) => (
+                  <SwiperSlide key={key}>
+                    <a href={`/details/${book.slug}`} className=''>
+                      <Image
+                        borderRadius={30}
+                        src={
+                          'http://localhost:5000/src/public/images/' +
+                          book.images
+                        }
+                      />
+                      <div className='lq-book-name'>{book.name}</div>
+                      <div className='detail-content_cate'>
+                        {books.author.name}
+                      </div>
+                      <p className='detail_content-pirce'>
+                        {book.price ? formatPriceVND(book.price) : ''}
+                      </p>
+                    </a>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+              {/* <div className='row'>
               <div className='col-lg-4'></div>
             </div> */}
             </div>

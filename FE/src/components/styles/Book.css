@@ -20,12 +20,11 @@
   place-items: center;
 }
 
-
 .menuItem {
   border-radius: 15px;
   width: 250px;
   height: 400px;
-  margin: 15px;
+  margin: 10px auto;
   box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
   text-align: center;
 }

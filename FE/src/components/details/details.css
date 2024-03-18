@@ -8,13 +8,17 @@
   font-size: 18px;
   font-weight: bold;
 }
-.lq-book-name{
+.lq-book-name {
   font-size: 32px;
   font-weight: bold;
 }
 .detail-content_cate {
   color: #a2a1a1;
   font-size: 24px;
+}
+
+.detail-content_btn {
+  min-height: 62px;
 }
 
 .Tab-pannel {
@@ -30,31 +34,30 @@
   padding: 4px;
 }
 
-.tt-detail{
+.tt-detail {
   display: flex;
   width: max-content;
   margin-left: 180px;
   height: 800px;
 }
 
-
-.img-detail{
+.img-detail {
   margin-right: 30px;
 }
 
 @media screen and (max-width: 768px) {
-  .tt-detail{
-   display: block;
-   padding: 16px;
-   margin-left: 10px;
-   width: 400px;
-   height: 500px;
-   margin-bottom: 530px;
+  .tt-detail {
+    display: block;
+    padding: 16px;
+    margin-left: 10px;
+    width: 400px;
+    height: 500px;
+    margin-bottom: 530px;
   }
-  .img-detail{
+  .img-detail {
     margin-bottom: 10px;
   }
-  .ttsach-detail{
+  .ttsach-detail {
     margin-right: 30px;
   }
 }

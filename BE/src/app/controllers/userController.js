@@ -26,7 +26,7 @@ class userController {
       });
       //* Save to database
       const user = await newUser.save();
-      return res.status(200);
+      res.status(200);
     } catch (err) {
       console.log(err);
       res.status(500).json(err);

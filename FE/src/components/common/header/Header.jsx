@@ -28,8 +28,8 @@ const Header = () => {
       );
       if (res.status === 200) {
         toast({
-          title: 'Logout successfully',
-          description: 'You have logged out successfully.',
+          title: 'Đăng xuất thành công',
+          description: 'Bạn đã đăng xuất thành công',
           status: 'success',
           duration: 2000,
           isClosable: true,
@@ -89,29 +89,29 @@ const Header = () => {
                 {!isLogin ? (
                   <>
                     <Link className='m-0 dropdown-item' to='/signin'>
-                      Sign in
+                      Đăng nhập
                     </Link>
                     <Link
                       className='signup-btn text-white m-0 dropdown-item'
                       to='/signup'
                     >
-                      Sign up
+                      Đăng ký
                     </Link>
                   </>
                 ) : (
                   <>
                     <Link className='m-0 dropdown-item' to='/profile'>
-                      Profile
+                      Sách của tôi
                     </Link>
                     <Link className='m-0 dropdown-item' to='/settings'>
-                      Settings
+                      Cài đặt
                     </Link>
                     <Link
                       onClick={handleLogout}
                       className='m-0 text-danger dropdown-item'
                       to='/logout'
                     >
-                      Logout
+                      Đăng xuất
                     </Link>
                   </>
                 )}

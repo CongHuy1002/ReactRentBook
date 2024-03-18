@@ -100,22 +100,22 @@ const Payment = () => {
               </div>
               <div className='col-lg-4 product-content-left-small-img'>
                 <div className='div2'>
-                  <h1 className='text-center'>Summary</h1>
+                  <h1 className='text-center'>Tóm tắt</h1>
                   <form onSubmit={handleSubmit}>
                     <div className='d-flex align-items-center justify-content-between product-content-left-big-img'>
-                      <p className='m-0'>Quantity</p>
+                      <p className='m-0'>Số lượng</p>
                       <span>{datas.cartItemCount}</span>
                     </div>
                     <div className='d-flex align-items-center justify-content-between product-content-left-big-img'>
-                      <p className='m-0 fw-bold'>Total</p>
+                      <p className='m-0 fw-bold'>Tổng tiền</p>
                       <span className='cart_price'>{formattedPrice}</span>
                     </div>
                     <div className='d-flex align-items-center justify-content-between product-content-left-big-img'>
-                      <p className='m-0 fw-bold'>Total rental days</p>
+                      <p className='m-0 fw-bold'>Tổng ngày thuê</p>
                       <span className=''>{dayrent}</span>
                     </div>
                     <div className='form-group fw-bold'>
-                      <label>Choose Payment Method:</label>
+                      <label>Chọn phương thức thanh toán</label>
                       <div className='controls'>
                         <label className='radio-inline d-flex'>
                           <input
@@ -146,7 +146,7 @@ const Payment = () => {
                       </div>
                     </div>
                     <button type='submit' className='cart_order-btn text-white'>
-                      Order Now!
+                      Thanh Toán Ngay
                     </button>
                   </form>
                 </div>

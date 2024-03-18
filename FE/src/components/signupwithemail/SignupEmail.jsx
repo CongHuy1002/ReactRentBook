@@ -20,8 +20,8 @@ const SignupEmail = () => {
       );
       if (res.status === 200) {
         toast({
-          title: 'Email Dispatched Successfully',
-          description: 'We just sent your an email, please have a look',
+          title: 'Email đã gửi cho bạn',
+          description: 'Chúng tôi đã gửi email cho bạn, hãy kiểm tra nhé',
           status: 'success',
           duration: 9000,
           isClosable: true,
