@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .bookItem {
     text-align: center;
     display: flex;
@@ -13,5 +14,10 @@
  width: 220px;
  height: 332px;
  border-radius: 20px;
+=======
+.bookItem img{
+ width: 237px;
+ height: 332px;
+>>>>>>> 0e901eb9e2d633f1bc4871ff9a193f55ed398c81
 }
 

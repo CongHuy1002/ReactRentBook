@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import './App.css';
 
 function App() {
@@ -17,6 +18,17 @@ function App() {
         </a>
       </header>
     </div>
+=======
+import "./App.css"
+import Pages from './components/pages/Pages';
+// Bootstrap CSS
+import "bootstrap/dist/css/bootstrap.min.css";
+// Bootstrap Bundle JS
+import "bootstrap/dist/js/bootstrap.bundle.min";
+function App() {
+  return (
+    <Pages />
+>>>>>>> 0e901eb9e2d633f1bc4871ff9a193f55ed398c81
   );
 }
 

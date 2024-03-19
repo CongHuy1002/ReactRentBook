@@ -10,7 +10,14 @@
     padding-top: 80px;
     padding-left: 150px;
   }
+<<<<<<< HEAD
  
+=======
+ .text h1{
+  font-size: 32px;
+  font-weight: bold;
+ }
+>>>>>>> 0e901eb9e2d633f1bc4871ff9a193f55ed398c81
   .container-df {
     display: grid;
     grid-template-columns: 6fr 2fr 2fr 1fr;
@@ -22,6 +29,13 @@
     width: 500px;
     height: 320px;
   }
+<<<<<<< HEAD
+=======
+  .container-imgsale {
+    width: 500px;
+    height: 320px;
+  }
+>>>>>>> 0e901eb9e2d633f1bc4871ff9a193f55ed398c81
 
   .sale {
     font-size: 40px;
@@ -36,6 +50,13 @@
         width: 280px;
         height: 200px;
       }
+<<<<<<< HEAD
+=======
+      .container-imgsale {
+        width: 280px;
+        height: 200px;
+      }
+>>>>>>> 0e901eb9e2d633f1bc4871ff9a193f55ed398c81
 
     .footerDiscount h1 {
         font-size: 14px;
@@ -46,4 +67,11 @@
         font-size: 20px;
         padding-left: 30px;
     }  
+<<<<<<< HEAD
+=======
+    .text h1{
+      font-size: 16px;
+      font-weight: bold;
+     }
+>>>>>>> 0e901eb9e2d633f1bc4871ff9a193f55ed398c81
   }

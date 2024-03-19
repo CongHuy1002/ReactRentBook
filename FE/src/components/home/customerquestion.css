@@ -26,6 +26,10 @@
   .jointeam{
     padding-left: 140px;
     font-weight: initial;
+<<<<<<< HEAD
+=======
+    font-size: 24px;
+>>>>>>> 0e901eb9e2d633f1bc4871ff9a193f55ed398c81
   }
 
   @media screen and (max-width: 800px) {
@@ -43,6 +47,10 @@
     .jointeam{
       padding-left: 10px;
       font-weight: initial;
+<<<<<<< HEAD
+=======
+      font-size: 16px;
+>>>>>>> 0e901eb9e2d633f1bc4871ff9a193f55ed398c81
     }
     .container-imgquestion img{
       height: 140px;

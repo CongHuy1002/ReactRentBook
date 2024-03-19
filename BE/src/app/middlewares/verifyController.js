@@ -3,6 +3,10 @@ const jwt = require('jsonwebtoken');
 class VerifyController {
   verifyToken = (req, res, next) => {
     const token = req.cookies.accessToken;
+<<<<<<< HEAD
+=======
+    console.log(req.cookies.accessToken);
+>>>>>>> 0e901eb9e2d633f1bc4871ff9a193f55ed398c81
     console.log(token);
     if (token) {
       // const accessToken = token.split(' ')[1];
@@ -16,14 +20,22 @@ class VerifyController {
         }
       });
     } else {
+<<<<<<< HEAD
       res.redirect('/loginform')
+=======
+      res.status(500).json('Login again');
+>>>>>>> 0e901eb9e2d633f1bc4871ff9a193f55ed398c81
     }
   };
 
   verifyAdmin = (req, res, next) => {
     this.verifyToken(req, res, () => {
       if (req.user.admin) {
+<<<<<<< HEAD
         res.redirect('/admin/stored/order')
+=======
+        res.redirect('/admin/stored/order');
+>>>>>>> 0e901eb9e2d633f1bc4871ff9a193f55ed398c81
       } else {
         next();
       }

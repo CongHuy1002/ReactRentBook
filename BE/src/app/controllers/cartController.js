@@ -1,10 +1,15 @@
 const Users = require('../model/User');
 const Books = require('../model/Book');
+<<<<<<< HEAD
+=======
+const jwt = require('jsonwebtoken');
+>>>>>>> 0e901eb9e2d633f1bc4871ff9a193f55ed398c81
 class cartController {
   addCart(req, res, next) {
     const productID = req.body.productID;
     if (productID) {
       Books.findById(productID)
+<<<<<<< HEAD
         .then(book => {
           Users.findById(req.user.id)
             .then(user => {
@@ -18,12 +23,30 @@ class cartController {
     }
     else {
       return res.status(400).json({ message: "book not found" });
+=======
+        .then((book) => {
+          Users.findById(req.user.id).then((user) => {
+            return user.addToCart(book);
+          });
+        })
+        .then((result) => {
+          res
+            .status(200)
+            .json({ message: 'Added to cart successfully', result: result });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      return res.status(400).json({ message: 'book not found' });
+>>>>>>> 0e901eb9e2d633f1bc4871ff9a193f55ed398c81
     }
   }
   async getCart(req, res) {
     Users.findById(req.user.id)
       .populate('cart.items.productID')
       .exec()
+<<<<<<< HEAD
       .then(user => {
         const cartItems = user.cart.items;
         const cartItemCount = cartItems.length;
@@ -38,10 +61,24 @@ class cartController {
         })
       })
       .catch(err => {
+=======
+      .then((user) => {
+        const cartItems = user.cart.items;
+        console.log(cartItems);
+        const cartItemCount = cartItems.length;
+        let totalPrice = 0;
+        cartItems.forEach((p) => {
+          totalPrice += p.productID.price;
+        });
+        res.status(200).json({ cartItems, totalPrice, cartItemCount });
+      })
+      .catch((err) => {
+>>>>>>> 0e901eb9e2d633f1bc4871ff9a193f55ed398c81
         console.log(err);
         res.status(500).json({ message: 'Server Error' });
       });
   }
+<<<<<<< HEAD
    postCart(req, res) {
       const selectedDate = new Date(req.body.date);
       console.log(selectedDate);
@@ -78,6 +115,52 @@ class cartController {
       return res.status(400).json({ message: "Course not found" });
     }
 
+=======
+  postCart(req, res) {
+    const selectedDate = new Date(req.body.date);
+    console.log(selectedDate);
+    const currentDate = new Date();
+    selectedDate.setHours(0, 0, 0, 0);
+    currentDate.setHours(0, 0, 0, 0);
+    // Convert the time difference to days
+    const daysDifference = Math.ceil(
+      (selectedDate - currentDate) / (1000 * 3600 * 24),
+    );
+    Users.findById(req.user.id)
+      .then((user) => {
+        user.updateToCart(selectedDate, daysDifference);
+        res.status(200).json('ok');
+      })
+      .catch((err) => {
+        return res.json(err);
+      });
+  }
+  deleteItemsCart(req, res, next) {
+    const productID = req.body.productId;
+    const token = req.cookies.accessToken;
+
+    jwt.verify(token, process.env.JWT_ACCESS_TOKEN, (err, user) => {
+      if (err) {
+        console.log(err);
+        res.status(403).json('Token is not valid');
+      } else {
+        req.user = user;
+        if (productID) {
+          Users.findById(req.user.id)
+            .then((user) => {
+              user.removeFromCart(productID);
+              res.status(200).json('delete success');
+            })
+            .catch((err) => {
+              console.log(err);
+              res.status(500).json({ message: 'Internal Server Error' });
+            });
+        } else {
+          res.status(400).json({ message: 'Product ID not provided' });
+        }
+      }
+    });
+>>>>>>> 0e901eb9e2d633f1bc4871ff9a193f55ed398c81
   }
   postPaymentUrl(req, res, next) {
     process.env.TZ = 'Asia/Ho_Chi_Minh';
@@ -85,7 +168,12 @@ class cartController {
     let date = new Date();
     let createDate = moment(date).format('YYYYMMDDHHmmss');
 
+<<<<<<< HEAD
     let ipAddr = req.headers['x-forwarded-for'] ||
+=======
+    let ipAddr =
+      req.headers['x-forwarded-for'] ||
+>>>>>>> 0e901eb9e2d633f1bc4871ff9a193f55ed398c81
       req.connection.remoteAddress ||
       req.socket.remoteAddress ||
       req.connection.socket.remoteAddress;
@@ -126,6 +214,7 @@ class cartController {
 
     let querystring = require('qs');
     let signData = querystring.stringify(vnp_Params, { encode: false });
+<<<<<<< HEAD
     let crypto = require("crypto");
     let hmac = crypto.createHmac("sha512", secretKey);
     let signed = hmac.update(new Buffer(signData, 'utf-8')).digest("hex");
@@ -138,3 +227,16 @@ class cartController {
 }
 
 module.exports = new cartController();
+=======
+    let crypto = require('crypto');
+    let hmac = crypto.createHmac('sha512', secretKey);
+    let signed = hmac.update(new Buffer(signData, 'utf-8')).digest('hex');
+    vnp_Params['vnp_SecureHash'] = signed;
+    vnpUrl += '?' + querystring.stringify(vnp_Params, { encode: false });
+
+    res.redirect(vnpUrl);
+  }
+}
+
+module.exports = new cartController();
+>>>>>>> 0e901eb9e2d633f1bc4871ff9a193f55ed398c81

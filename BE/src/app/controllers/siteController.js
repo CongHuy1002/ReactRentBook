@@ -2,13 +2,20 @@ const Books = require('../model/Book');
 const Author = require('../model/Author');
 const Users = require('../model/User');
 const Orders = require('../model/Order');
+<<<<<<< HEAD
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const Genres = require('../model/Genres');
+=======
+const Genres = require('../model/Genres');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+>>>>>>> 0e901eb9e2d633f1bc4871ff9a193f55ed398c81
 class siteController {
   async index(req, res, next) {
     try {
       const addtocartAPI = process.env.addtocartAPI;
+<<<<<<< HEAD
       const books = await Books.find().populate('author').lean();
       const author = await Author.find().lean();
       res.render('home', {
@@ -18,11 +25,33 @@ class siteController {
       });
     } catch {
       res.status(500);
+=======
+      const sortPrice = req.query.sortPrice;
+      const sortName = req.query.sortName;
+
+      let sortCriteria = {};
+      if (sortPrice === 'asc' || sortPrice === 'desc') {
+        sortCriteria.price = sortPrice === 'asc' ? 1 : -1;
+      }
+      if (sortName === 'asc' || sortName === 'desc') {
+        sortCriteria.name = sortName === 'asc' ? 1 : -1; // Assuming 'title' is the field name for book titles
+      }
+
+      const books = await Books.find()
+        .populate('author')
+        .sort(sortCriteria)
+        .lean();
+      const author = await Author.find().lean();
+      res.json({ author, books, addtocartAPI });
+    } catch (error) {
+      res.status(500).send(error.message);
+>>>>>>> 0e901eb9e2d633f1bc4871ff9a193f55ed398c81
     }
   }
 
   async postBook(req, res, next) {
     try {
+<<<<<<< HEAD
       const imageFiles = req.files['images']; // Retrieve the array of image files
       const imageUrl = imageFiles.map((file) => file.path); // Map the paths of image files
 
@@ -32,14 +61,30 @@ class siteController {
         ...req.body,
         images: imageUrl,
         pdfFile: pdfUrl,
+=======
+      // const imageFiles = req.files['images']; // Retrieve the array of image files
+      // const imageUrl = imageFiles.map((file) => file.path); // Map the paths of image files
+      const imageName = req.files['images'][0].filename;
+      const pdfFile = req.files['pdfFile'][0].filename; // Retrieve the single PDF file
+      // const pdfUrl = pdfFile.path; // Get the path of the uploaded PDF file
+      const newBook = new Books({
+        ...req.body,
+        images: imageName,
+        pdfFile: pdfFile,
+>>>>>>> 0e901eb9e2d633f1bc4871ff9a193f55ed398c81
       });
       const saveBook = await newBook.save();
       if (req.body.author) {
         const author = Author.findById(req.body.author);
         await author.updateOne({ $push: { books: saveBook._id } });
       }
+<<<<<<< HEAD
       if (req.body.genre) {
         const genre = Genres.findById(req.body.genre);
+=======
+      if (req.body.genres) {
+        const genre = Genres.findById(req.body.genres);
+>>>>>>> 0e901eb9e2d633f1bc4871ff9a193f55ed398c81
         await genre.updateOne({ $push: { books: saveBook._id } });
       }
       res.status(200).json(saveBook);
@@ -47,15 +92,29 @@ class siteController {
       res.status(500).json(err);
     }
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0e901eb9e2d633f1bc4871ff9a193f55ed398c81
   async detailsBook(req, res, next) {
     try {
       const book = await Books.findOne({ slug: req.params.slug })
         .lean()
         .populate('author');
       const authorBook = await Books.find({ author: book.author._id }).lean();
+<<<<<<< HEAD
       const addToCartAPI = process.env.addtocartAPI;
       res.status(200).json(book, authorBook, addToCartAPI);
+=======
+      const genres = await Genres.findById(book.genres._id).lean();
+      const addToCartAPI = process.env.addtocartAPI;
+      res.status(200).json({
+        book,
+        authorBook,
+        addToCartAPI,
+        genres,
+      });
+>>>>>>> 0e901eb9e2d633f1bc4871ff9a193f55ed398c81
     } catch (err) {
       res.status(500).json(err);
     }
@@ -73,6 +132,7 @@ class siteController {
       res.status(500).json(err);
     }
   }
+<<<<<<< HEAD
   async myBook(req, res) {
     try {
       const user = await Users.findById(req.user.id);
@@ -90,6 +150,66 @@ class siteController {
       });
     } catch (err) {
       res.status(500).json({ message: 'Server Error' });
+=======
+
+  async searchBook(req, res) {
+    try {
+      const query = req.query.q; // Retrieve the search query from the request URL query parameters
+
+      if (!query || query.trim() === '') {
+        return res.status(400).json({ message: 'Invalid search query' });
+      }
+
+      // Perform the search based on the query
+      const books = await Books.find({
+        $or: [
+          { name: { $regex: query, $options: 'i' } }, // Case-insensitive title search
+        ],
+      })
+        .populate('author')
+        .lean();
+
+      res.json({ books });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+  async myBook(req, res) {
+    try {
+      const token = req.headers.access_token; // Ensure token is defined
+
+      // Verify the token asynchronously
+      jwt.verify(token, process.env.JWT_ACCESS_TOKEN, async (err, user) => {
+        if (err) {
+          console.log(err);
+          return res.status(403).json('Token is not valid');
+        }
+
+        // Once the token is verified, proceed with the rest of the function
+        try {
+          const foundUser = await Users.findById(user.id);
+          const orders = await Orders.find({ 'user.userID': foundUser._id });
+
+          // Constructing an array of products with their timerent
+          const productsWithTimerent = orders.flatMap((order) =>
+            order.products.map((product) => ({
+              ...product.productData,
+              timerent: product.timerent,
+            })),
+          );
+
+          console.log(productsWithTimerent);
+          return res.status(200).json({ productsWithTimerent });
+        } catch (innerErr) {
+          // Handle any errors that occur while fetching user or orders
+          console.error(innerErr);
+          return res.status(500).json('Internal Server Error');
+        }
+      });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json('Internal Server Error');
+>>>>>>> 0e901eb9e2d633f1bc4871ff9a193f55ed398c81
     }
   }
 
@@ -98,7 +218,10 @@ class siteController {
       const productId = req.body.productID;
       const user = await Users.findById(req.user.id);
       const order = await Orders.findOne({ 'user.userID': user._id });
+<<<<<<< HEAD
       console.log(order);
+=======
+>>>>>>> 0e901eb9e2d633f1bc4871ff9a193f55ed398c81
       if (!user) {
         return res.status(403).json('Not find User');
       }
@@ -106,9 +229,15 @@ class siteController {
       const token = jwt.sign({ id: user._id, productId }, secret, {
         expiresIn: '5m',
       });
+<<<<<<< HEAD
       const url = `http://localhost:3000/readbook/${user._id}/${token}`;
       console.log(url);
       return res.status(200).json({ url });
+=======
+      const url = `http://localhost:5000/readbook/${user._id}/${token}`;
+      console.log(url);
+      return res.status(200).json(url);
+>>>>>>> 0e901eb9e2d633f1bc4871ff9a193f55ed398c81
     } catch (err) {
       return res.status(500).json(err);
     }
