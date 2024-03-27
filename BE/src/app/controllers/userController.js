@@ -46,21 +46,15 @@ class userController {
         res.status(404).json('wrong password');
       }
       if (user && validPassword) {
-        const accessToken = jwt.sign(
-          {
-            id: user.id,
-            admin: user.admin,
-          },
+        const accessToken = JwtFactory.createToken(
+          { id: user.id, admin: user.admin },
           process.env.JWT_ACCESS_TOKEN,
-          { expiresIn: '24h' },
+          '24h',
         );
-        const refreshToken = jwt.sign(
-          {
-            id: user.id,
-            admin: user.admin,
-          },
-          process.env.JWT_REFRESH_TOKEN, //* secret key
-          { expiresIn: '365d' }, //* expried day
+        const refreshToken = JwtFactory.createToken(
+          { id: user.id, admin: user.admin },
+          process.env.JWT_REFRESH_TOKEN,
+          '365d',
         );
         refreshTokenArray.push(refreshToken);
         res.cookie('refreshToken', refreshToken, {
@@ -115,12 +109,10 @@ class userController {
           return res.status(403).json('Not find User');
         }
         const secret = process.env.JWT_ACCESS_TOKEN + user.password;
-        const token = jwt.sign(
+        const token = JwtFactory.createToken(
           { gmailInput: user.gmailInput, id: user._id },
           secret,
-          {
-            expiresIn: '5m',
-          },
+          '5m',
         );
         const link = process.env.linkResetPasswordAPI + `/${user._id}/${token}`;
         console.log(link);
